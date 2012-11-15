@@ -1,0 +1,33 @@
+<html>
+<head>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.answer').bind('click', function () {
+      $.get("/vote/"+this.id+"/", function(data) {
+          guess_result= data;
+          $('#result')[0].innerHTML=guess_result;
+      });
+   });
+});
+</script>
+</head>
+
+
+<body>
+
+<div id = "current_question">
+  <h2>CURRENT QUESTION</h2>
+	{% for a in current_question.answer_set.all %}
+	{% csrf_token %}
+		<div id="{{a.id}}" class="answer"><p onmouseout="this.style.color = 'black';" onmouseover="this.style.color = 'red';">{{a.answer}}</p></div>
+	{% endfor %}
+</div>
+
+<div id="previous_question">
+  {{previous_question.question}}
+</div>
+
+
+</body>
+</html>
