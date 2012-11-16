@@ -40,7 +40,7 @@ class Answer(models.Model):
 		return u'%s' % (self.answer,)
 
 	def get_vote_count(self):
-		return Vote.objects.filter(item=self).count()
+		return Vote.objects.filter(answer=self).count()
 
 	def get_vote_count_male(self):
 		return self.selected_by.filter(gender="male").count()

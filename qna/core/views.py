@@ -15,13 +15,25 @@ from accounts.models import UserProfile
 from django.db.models import Q
 from django.conf import settings
 from django.utils import simplejson
+from django.core import serializers
+from django.contrib.auth.models import User, AnonymousUser
 
 
-def test(request):
-	response_string="hello"
-	print response_string
-	return HttpResponse(response_string,mimetype='text/plain')
 
+def previous_question(request, previous_question_pk):
+	previous_question = Question.objects.get(id = previous_question_pk)
+	print previous_question
+	context = {
+		'previous_question':previous_question,
+	}
+	return render_to_response("previous_question.html", context, context_instance=RequestContext(request))
+
+def current_question(request, current_question_pk):
+	current_question = Question.objects.get(id = current_question_pk)
+	context = {
+		'current_question':current_question,
+	}
+	return render_to_response("current_question.html", context, context_instance=RequestContext(request))
 
 def index(request):
 	if request.user.is_authenticated():
@@ -43,50 +55,41 @@ def index(request):
 		return render_to_response("index.html")
 
 def vote(request, answer_id):
-	message = {"previous_question": ""}
 	if request.is_ajax():
-		print "ajax request"
-		answer = Answer.objects.get(id = answer_id)
-		print "answer selected was: %s" %answer
-		previous_question = answer.question
-		print "Question just answered: %s" %previous_question
+		a = Answer.objects.get(id = answer_id)
+		previous_question = a.question
+		vote = Vote.objects.create(
+			question = previous_question,
+			ip=request.META['REMOTE_ADDR'],
+			answer = a,
+			)
+		if request.user.is_authenticated():
+			grabuser = UserProfile.objects.get(username = request.user.username)
+		else:
+			grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'])
+		vote.users.add(grabuser)
+		voted_answer = vote.answer
+		voted_answer.selected_by.add(grabuser)
+		voted_question = vote.question
+		voted_question.answered_by.add(grabuser)
+		voted_question.save()
+		voted_answer.save()
+		vote.save()
 		current_question = Question.objects.filter(~Q(id = previous_question.id)).order_by('?')[:1].get()
-		print "Next question up is: %s" %current_question
-		message = {
-			'previous_question':previous_question,
-			'current_question':current_question,
+		data = {
+			"previous_question_pk":previous_question.id,
+			"current_question_pk":current_question.id,
 		}
-	else:
-		message = "no data"
-	json = simplejson.dumps(message)
+	json = simplejson.dumps(data)
 	return HttpResponse(json, mimetype='application/json')
 
 def questions(request):
-	# user = request.user
-	# if request.method == "POST":
-	# 	print "request is post!"
-	# 	if request.is_ajax():
-	# 		resp = dict()
-			
-	# 		print "request is ajax!"
-	# 	else:
-	# 		print "request is NOT AJAX"
-	# 	answer_pk = request.POST.get("answer", False)
-	# 	print answer_pk
-	# 	if user.is_authenticated():
-	# 		current_question = Question.objects.filter(~Q(answered_by = user))[:1].get()
-	# 	else:
-	# 		current_question = Question.objects.order_by('?')[:1].get()
-	# 	context = {
-	# 		'current_question':current_question,
-	# 	}
-	# 	return render_to_response("questions.html", context, context_instance=RequestContext(request))
-	user = request.user
-	if user.is_authenticated():
-		current_question = Question.objects.filter(~Q(answered_by = user))[:1].get()
+	if request.user.is_authenticated():
+		grabuser = UserProfile.objects.get(username = request.user.username)
 	else:
-		current_question = Question.objects.order_by('?')[:1].get()
-		print Question.objects.all()
+		grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'])
+	#current_question = Question.objects.filter(~Q(answered_by = grabuser))[:1].get() #----enable this line to prevent repeating questions
+	current_question = Question.objects.all().order_by('?')[:1].get()
 	context = {'current_question' : current_question,}
 	return render_to_response("questions.html", context, context_instance=RequestContext(request))
 

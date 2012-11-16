@@ -11,6 +11,8 @@ urlpatterns = patterns('',
 	url(r'', include('social_auth.urls')),
 	url(r'^questions/$', 'core.views.questions', name='questions'),
 	url(r'^vote/(?P<answer_id>\d+)/$', 'core.views.vote', name='vote'),
+    url(r'^previous_question/(?P<previous_question_pk>\d+)/$', 'core.views.previous_question', name='previous_question'),
+    url(r'^current_question/(?P<current_question_pk>\d+)/$', 'core.views.current_question', name='current_question'),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

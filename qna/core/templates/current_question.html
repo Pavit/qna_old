@@ -1,0 +1,50 @@
+
+  {% load staticfiles %}
+<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css" />
+ <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+	<script type="text/javascript">
+  $(document).ready(function() {
+    $('.answer').bind('click', function () {
+      $.get("/vote/"+this.id+"/", function(data) {
+      	$('#previous_question').fadeOut( 100, function() {
+      		$('#previous_question').html( '&nbsp;' ).load('/previous_question/'+data.previous_question_pk+"/");
+      	}).delay(500).fadeIn(500);
+      	$('#current_question').fadeOut( 100, function() {
+      		$('#current_question').html( '&nbsp;' ).load('/current_question/'+data.current_question_pk+"/");
+      	}).fadeIn(500);
+
+      });
+   });
+});
+</script>
+
+
+
+
+<div class="container">
+
+  <div class="row">
+      <div class="span2 height2 red">
+        <h1>Q.</h1>
+          <div class="inner">
+            <p class="currentquestion">{{current_question.question}}</p>
+          </div>
+      </div>
+            
+      <div class="span5 height2 blue">
+        <h1>A.</h1>
+        <div class="inner">
+          {% for a in current_question.answer_set.all %}
+          {% csrf_token %}
+          <a href="#" id = "{{a.id}}" type="int" class="answer"><p>{{a.answer}}</p></a>
+          {%endfor%}
+        </div>
+      </div>
+  </div>
+
+        <div class="inner">
+          <p class="note">Skip...</p>
+        </div>
+
+</div>

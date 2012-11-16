@@ -1,33 +1,69 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>QNA</title>
+{% load staticfiles %}
+    <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart']});
+ </script>
 <script type="text/javascript">
   $(document).ready(function() {
+    $('#current_question').html( '&nbsp;' ).load('/current_question/'+{{current_question.id}}+"/");
     $('.answer').bind('click', function () {
       $.get("/vote/"+this.id+"/", function(data) {
-          guess_result= data;
-          $('#result')[0].innerHTML=guess_result;
+      	$('#previous_question').fadeOut( 100, function() {
+      		$('#previous_question').html( '&nbsp;' ).load('/previous_question/'+data.previous_question_pk+"/");
+      	}).delay(500).fadeIn(500);
+      	$('#current_question').fadeOut( 100, function() {
+      		$('#current_question').html( '&nbsp;' ).load('/current_question/'+data.current_question_pk+"/");
+      	}).fadeIn(500);
+
       });
    });
 });
 </script>
-</head>
 
+</head>
 
 <body>
 
+<div class="container">
+<div class="header">
+<a class="brand">QNA</a>
+<form class="search pull-right">
+	<input type="text" class="search-query" placeholder="Search...">
+</form>
+<ul class="nav pull-right">
+<li><a href="#">Submit</a></li>
+<li><a href="#">Profile</a></li>
+<li><a href="#">Login</a></li>
+</ul>
+</div>
+
+</div>
+
 <div id = "current_question">
-  <h2>CURRENT QUESTION</h2>
-	{% for a in current_question.answer_set.all %}
-	{% csrf_token %}
-		<div id="{{a.id}}" class="answer"><p onmouseout="this.style.color = 'black';" onmouseover="this.style.color = 'red';">{{a.answer}}</p></div>
-	{% endfor %}
-</div>
-
-<div id="previous_question">
-  {{previous_question.question}}
 </div>
 
 
+<div id = "previous_question">
+ {% include "previous_question.html" %}
+</div>
+</div>
+
+
+<footer>
+<p>Copyright gibberish.</p>
+</footer>
+
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+
+</div>
 </body>
+
 </html>

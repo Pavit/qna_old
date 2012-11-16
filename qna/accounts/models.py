@@ -5,9 +5,9 @@ import time, datetime
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 
-# class UserProfileManager(models.Manager):
-# 	def create_user(self, username, email):
-# 		return self.model._default_manager.create(username=username)
+class UserProfileManager(models.Manager):
+	def create_user(self, username, email):
+		return self.model._default_manager.create(username=username)
 
 
 class Education(models.Model):
@@ -22,7 +22,8 @@ class Concentration(models.Model):
 	education = models.ForeignKey(Education)
 	
 class UserProfile(models.Model):
-	user = models.OneToOneField(User)
+	username = models.CharField(max_length=128, unique=True, blank=True, null=True)
+	anonymous = models.BooleanField()
 	ip = models.IPAddressField(verbose_name=_('user\'s IP'))
 	full_name = models.CharField(max_length=128, unique=True, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add = True)
@@ -51,11 +52,13 @@ class UserProfile(models.Model):
 	friends = models.ManyToManyField('self')
 	age = models.IntegerField(blank=True, null=True)
 	
-	#objects = UserProfileManager()
+	objects = UserProfileManager()
+	def is_authenticated(self):
+		return True
 
 	def populate_graph_info(self):
 		graphinfo = GraphAPI(self.fb_access_token).get('me/')
-		if "name" in graphinfo: self.name = graphinfo["name"]
+		if "name" in graphinfo: self.username = graphinfo["name"]
 		if "first_name" in graphinfo: self.first_name = graphinfo["first_name"]
 		if "last_name" in graphinfo: self.last_name = graphinfo["last_name"]
 		if "gender" in graphinfo: self.gender = graphinfo["gender"]
