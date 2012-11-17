@@ -3,6 +3,10 @@
 <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css" />
  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+      <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart']});
+ </script>
 	<script type="text/javascript">
   $(document).ready(function() {
     $('.answer').bind('click', function () {
@@ -16,11 +20,9 @@
 
       });
    });
+
 });
 </script>
-
-
-
 
 <div class="container">
 

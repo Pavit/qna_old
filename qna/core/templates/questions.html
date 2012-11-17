@@ -14,8 +14,10 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#current_question').html( '&nbsp;' ).load('/current_question/'+{{current_question.id}}+"/");
+
     $('.answer').bind('click', function () {
       $.get("/vote/"+this.id+"/", function(data) {
+        google.setOnLoadCallback(drawVisualization);
       	$('#previous_question').fadeOut( 100, function() {
       		$('#previous_question').html( '&nbsp;' ).load('/previous_question/'+data.previous_question_pk+"/");
       	}).delay(500).fadeIn(500);
@@ -48,13 +50,13 @@
 </div>
 
 <div id = "current_question">
+  
 </div>
 
 
 <div id = "previous_question">
- {% include "previous_question.html" %}
 </div>
-</div>
+
 
 
 <footer>
@@ -63,7 +65,7 @@
 
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
 
-</div>
+
 </body>
 
 </html>

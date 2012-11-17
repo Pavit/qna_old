@@ -9,11 +9,7 @@
 
 <body>
 {% load url from future %}
-<div id="landing-top"></div>
 
-<div id="landing-middle">
-<!-- Beginning of content -->
-<div id="landing-box-red">
 <p><a rel="nofollow" href="{% url "socialauth_begin" "facebook" %}">{{ "facebook"|title }}</a></p>
 <p><a href = "{% url 'core.views.questions' %}">Proceed anonymously</a></p>
 </div>

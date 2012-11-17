@@ -1,4 +1,39 @@
 
+    {% load staticfiles %}
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart']});
+ </script>
+     <script type="text/javascript">
+     $(document).ready(function(){
+      function drawVisualization() {
+        // Create and populate the data table.
+        var stuff = google.visualization.arrayToDataTable([
+          ['Answer Choice', 'Votes'],
+          {%for a in previous_question.answer_set.all%}
+          ['{{a.answer}}', {{a.vote_count}}],
+          {%endfor%}
+        ]);
+
+        var options = {
+            title:"",
+            backgroundColor: "#cccbc7",
+            legend: {position: 'right', alignment:'center', textStyle: {color: 'white', fontSize: 12}},
+            titleTextStyle: {color: 'white', fontName: 'Arial', fontSize: 15},
+            chartArea:{left:0,top:0,width:"100%",height:"100%"},
+            colors: ['f15c22', '000000','73a1d5','ffffff' ]
+            }
+        // Create and draw the visualization.
+        new google.visualization.PieChart(document.getElementById('visualization')).
+            draw(stuff, options);
+      }
+      google.setOnLoadCallback(drawVisualization);
+  });
+    </script>
+
 <div class="container">
     {% load core_tags %}
     <div class="row">
@@ -13,6 +48,7 @@
                 </p>
             </div>
             <div class="inner-box4">
+                <div id="visualization"></div>
               {% for a in previous_question.answer_set.all %}
 
 <p>{{ a.answer }}: {% filter floatformat %}{% percentage previous_question a %}{% endfilter %}%</p>
