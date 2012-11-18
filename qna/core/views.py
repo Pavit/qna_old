@@ -22,11 +22,19 @@ from django.contrib.auth.models import User, AnonymousUser
 
 def previous_question(request, previous_question_pk):
 	previous_question = Question.objects.get(id = previous_question_pk)
+
 	print previous_question
-	context = {
-		'previous_question':previous_question,
+	resp = {
+		'previous_question': previous_question.question,
 	}
-	return render_to_response("previous_question.html", context, context_instance=RequestContext(request))
+	answer_list =[]
+	answer_list.append(["Answer", "Votes"])
+	for a in previous_question.answer_set.all():
+		answer_list.append([a.answer, a.get_vote_count()])
+	resp["answers"] = answer_list
+	data = simplejson.dumps(resp)
+	return HttpResponse(data, mimetype = "application/json")
+	#return render_to_response("previous_question.html", {"data": resp, "previous_question":previous_question})
 
 def current_question(request, current_question_pk):
 	current_question = Question.objects.get(id = current_question_pk)

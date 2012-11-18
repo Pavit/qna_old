@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	(r'^test/$', 'core.views.test'),
+
     url(r'^$', 'core.views.index', name='index'),
     # url(r'^qna/', include('qna.foo.urls')),
 	url(r'', include('social_auth.urls')),

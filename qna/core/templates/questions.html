@@ -9,18 +9,33 @@
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
-    google.load('visualization', '1', {packages: ['corechart']});
- </script>
-<script type="text/javascript">
+  google.load("visualization", "1", { packages: ["corechart"] });
+  var chart;
+  var stuff;
+  function Change(s) {
+     google.setOnLoadCallback(reDraw(s));
+     function reDraw(s) {
+        stuff = google.visualization.arrayToDataTable(s);
+        chart = new google.visualization.PieChart(document.getElementById('visualization'));
+        options = {
+          'backgroundColor': "cccbc7"
+        };
+        chart.draw(stuff, options);
+     }
+    }
   $(document).ready(function() {
     $('#current_question').html( '&nbsp;' ).load('/current_question/'+{{current_question.id}}+"/");
-
+    $(".previous_question").hide();
     $('.answer').bind('click', function () {
       $.get("/vote/"+this.id+"/", function(data) {
-        google.setOnLoadCallback(drawVisualization);
-      	$('#previous_question').fadeOut( 100, function() {
-      		$('#previous_question').html( '&nbsp;' ).load('/previous_question/'+data.previous_question_pk+"/");
-      	}).delay(500).fadeIn(500);
+        $.ajax({
+          url: '/previous_question/' + data.previous_question_pk+"/",
+          success: function(data) {
+            Change(data.answers);
+            $(".previous_question .previousquestion").html(data.previous_question);
+            $(".previous_question").fadeOut(100).delay(500).fadeIn(500);
+          }
+        });
       	$('#current_question').fadeOut( 100, function() {
       		$('#current_question').html( '&nbsp;' ).load('/current_question/'+data.current_question_pk+"/");
       	}).fadeIn(500);
@@ -50,14 +65,38 @@
 </div>
 
 <div id = "current_question">
+</div>
+
+{#################### PREVIOUS QUESTION #########################}
+<div class = "previous_question">
+
+
+<div class="container">
+    {% load core_tags %}
+    <div class="row">
+        <div class="span7 height2 gray">
+            <div class="inner-box2">
+                <h2>
+                    Previously...
+                </h2>
+                <span class="previousquestion">
+                </p>
+            </div>
+            <div class="inner-box4">
+                <div id="visualization"></div>
   
+
+                <p class="note">
+                    More...
+                </p>
+            </div>
+        </div>
+    </div>
+</div>    
+
+
 </div>
-
-
-<div id = "previous_question">
-</div>
-
-
+{#################### PREVIOUS QUESTION #########################}
 
 <footer>
 <p>Copyright gibberish.</p>

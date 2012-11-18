@@ -6,23 +6,26 @@
       <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
     google.load('visualization', '1', {packages: ['corechart']});
- </script>
-	<script type="text/javascript">
-  $(document).ready(function() {
+      $(document).ready(function() {
+
     $('.answer').bind('click', function () {
       $.get("/vote/"+this.id+"/", function(data) {
-      	$('#previous_question').fadeOut( 100, function() {
-      		$('#previous_question').html( '&nbsp;' ).load('/previous_question/'+data.previous_question_pk+"/");
-      	}).delay(500).fadeIn(500);
-      	$('#current_question').fadeOut( 100, function() {
-      		$('#current_question').html( '&nbsp;' ).load('/current_question/'+data.current_question_pk+"/");
-      	}).fadeIn(500);
+        $.ajax({
+          url: '/previous_question/' + data.previous_question_pk+"/",
+          success: function(data) {
+            Change(data.answers);
+            $(".previous_question .previousquestion").html(data.previous_question);
+            $(".previous_question").fadeOut(100).delay(500).fadeIn(500);
+          }
+        });
+        $('#current_question').fadeOut( 100, function() {
+          $('#current_question').html( '&nbsp;' ).load('/current_question/'+data.current_question_pk+"/");
+        }).fadeIn(500);
 
       });
    });
-
 });
-</script>
+ </script>
 
 <div class="container">
 
