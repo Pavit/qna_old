@@ -1,0 +1,262 @@
+[
+    {
+        "pk": 1,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [
+                1
+            ],
+            "question": "Dogs or cats?"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [
+                1
+            ],
+            "question": "Terran, Protoss, or Zerg?"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "Who did you vote for?"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "Can you swim?"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "Blondes or Brunettes?"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "How do you feel about eating meat?"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Dogs",
+            "selected_by": [
+                1
+            ],
+            "question": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Cats",
+            "selected_by": [
+                1
+            ],
+            "question": 1
+        }
+    },
+    {
+        "pk": 3,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Neither",
+            "selected_by": [
+                1
+            ],
+            "question": 1
+        }
+    },
+    {
+        "pk": 4,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Turtles",
+            "selected_by": [
+                1
+            ],
+            "question": 1
+        }
+    },
+    {
+        "pk": 5,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Terran",
+            "selected_by": [
+                1
+            ],
+            "question": 2
+        }
+    },
+    {
+        "pk": 6,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Protoss",
+            "selected_by": [
+                1
+            ],
+            "question": 2
+        }
+    },
+    {
+        "pk": 7,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Zerg",
+            "selected_by": [
+                1
+            ],
+            "question": 2
+        }
+    },
+    {
+        "pk": 8,
+        "model": "core.answer",
+        "fields": {
+            "answer": "What?",
+            "selected_by": [
+                1
+            ],
+            "question": 2
+        }
+    },
+    {
+        "pk": 9,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Voting's for jews.",
+            "selected_by": [],
+            "question": 3
+        }
+    },
+    {
+        "pk": 10,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Obama",
+            "selected_by": [],
+            "question": 3
+        }
+    },
+    {
+        "pk": 11,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Romney",
+            "selected_by": [],
+            "question": 3
+        }
+    },
+    {
+        "pk": 12,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Yes",
+            "selected_by": [],
+            "question": 4
+        }
+    },
+    {
+        "pk": 13,
+        "model": "core.answer",
+        "fields": {
+            "answer": "No",
+            "selected_by": [],
+            "question": 4
+        }
+    },
+    {
+        "pk": 14,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Blondes",
+            "selected_by": [],
+            "question": 5
+        }
+    },
+    {
+        "pk": 15,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Brunettes",
+            "selected_by": [],
+            "question": 5
+        }
+    },
+    {
+        "pk": 16,
+        "model": "core.answer",
+        "fields": {
+            "answer": "I will take anything.",
+            "selected_by": [],
+            "question": 5
+        }
+    },
+    {
+        "pk": 17,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Meat is delicious.",
+            "selected_by": [],
+            "question": 6
+        }
+    },
+    {
+        "pk": 18,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Eating meat is unhealthy.",
+            "selected_by": [],
+            "question": 6
+        }
+    },
+    {
+        "pk": 19,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Eating meat is inhumane and uncivilized.",
+            "selected_by": [],
+            "question": 6
+        }
+    },
+    {
+        "pk": 20,
+        "model": "core.answer",
+        "fields": {
+            "answer": "I can't enjoy a meal unless it once had hopes and dreams.",
+            "selected_by": [],
+            "question": 6
+        }
+    }
+]

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>QNA</title>
+{% load staticfiles %}
+    <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart']});
+ </script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#current_question').html( '&nbsp;' ).load('/current_question/'+{{current_question.id}}+"/");
+
+    $('.answer').bind('click', function () {
+      $.get("/vote/"+this.id+"/", function(data) {
+        google.setOnLoadCallback(drawVisualization);
+      	$('#previous_question').fadeOut( 100, function() {
+      		$('#previous_question').html( '&nbsp;' ).load('/previous_question/'+data.previous_question_pk+"/");
+      	}).delay(500).fadeIn(500);
+      	$('#current_question').fadeOut( 100, function() {
+      		$('#current_question').html( '&nbsp;' ).load('/current_question/'+data.current_question_pk+"/");
+      	}).fadeIn(500);
+
+      });
+   });
+});
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+<div class="header">
+<a class="brand">QNA</a>
+<form class="search pull-right">
+	<input type="text" class="search-query" placeholder="Search...">
+</form>
+<ul class="nav pull-right">
+<li><a href="#">Submit</a></li>
+<li><a href="#">Profile</a></li>
+<li><a href="#">Login</a></li>
+</ul>
+</div>
+
+</div>
+
+<div id = "current_question">
+
+</div>
+
+
+<div id = "previous_question">
+
+</div>
+
+
+
+<footer>
+<p>Copyright gibberish.</p>
+</footer>
+
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+
+
+</body>
+
+</html>

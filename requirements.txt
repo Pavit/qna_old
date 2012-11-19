@@ -1,0 +1,8 @@
+Django==1.4.2
+psycopg2==2.4.5
+dj-database-url==0.2.0
+django-social-auth==0.7.9
+httplib2==0.7.2
+simplejson==2.3.2
+virtualenv==1.8.2
+requests
