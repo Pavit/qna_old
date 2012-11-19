@@ -22,7 +22,7 @@ class Concentration(models.Model):
 	education = models.ForeignKey(Education)
 	
 class UserProfile(models.Model):
-	username = models.CharField(max_length=128, unique=True, blank=True, null=True)
+	username = models.CharField(max_length=128, unique=False, blank=True, null=True)
 	anonymous = models.BooleanField()
 	ip = models.IPAddressField(verbose_name=_('user\'s IP'))
 	full_name = models.CharField(max_length=128, unique=True, blank=True, null=True)
