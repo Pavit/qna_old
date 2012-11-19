@@ -5,9 +5,7 @@
         "fields": {
             "date": "2012-11-12",
             "submitter": null,
-            "answered_by": [
-                1
-            ],
+            "answered_by": null,
             "question": "Dogs or cats?"
         }
     },
@@ -17,9 +15,7 @@
         "fields": {
             "date": "2012-11-12",
             "submitter": null,
-            "answered_by": [
-                1
-            ],
+            "answered_by": null,
             "question": "Terran, Protoss, or Zerg?"
         }
     },
@@ -29,7 +25,7 @@
         "fields": {
             "date": "2012-11-12",
             "submitter": null,
-            "answered_by": [],
+            "answered_by": null,
             "question": "Who did you vote for?"
         }
     },
@@ -39,7 +35,7 @@
         "fields": {
             "date": "2012-11-12",
             "submitter": null,
-            "answered_by": [],
+            "answered_by": null,
             "question": "Can you swim?"
         }
     },
@@ -49,7 +45,7 @@
         "fields": {
             "date": "2012-11-12",
             "submitter": null,
-            "answered_by": [],
+            "answered_by": null,
             "question": "Blondes or Brunettes?"
         }
     },
@@ -59,7 +55,7 @@
         "fields": {
             "date": "2012-11-12",
             "submitter": null,
-            "answered_by": [],
+            "answered_by": null,
             "question": "How do you feel about eating meat?"
         }
     },
@@ -68,9 +64,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Dogs",
-            "selected_by": [
-                1
-            ],
+            "selected_by": null,
             "question": 1
         }
     },
@@ -79,9 +73,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Cats",
-            "selected_by": [
-                1
-            ],
+            "selected_by": null,
             "question": 1
         }
     },
@@ -90,9 +82,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Neither",
-            "selected_by": [
-                1
-            ],
+            "selected_by": null,
             "question": 1
         }
     },
@@ -101,9 +91,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Turtles",
-            "selected_by": [
-                1
-            ],
+            "selected_by": null,
             "question": 1
         }
     },
@@ -112,9 +100,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Terran",
-            "selected_by": [
-                1
-            ],
+            "selected_by": null,
             "question": 2
         }
     },
@@ -123,9 +109,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Protoss",
-            "selected_by": [
-                1
-            ],
+            "selected_by": null,
             "question": 2
         }
     },
@@ -134,9 +118,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Zerg",
-            "selected_by": [
-                1
-            ],
+            "selected_by": null,
             "question": 2
         }
     },
@@ -145,9 +127,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "What?",
-            "selected_by": [
-                1
-            ],
+            "selected_by": null,
             "question": 2
         }
     },
@@ -156,7 +136,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Voting's for jews.",
-            "selected_by": [],
+            "selected_by": null,
             "question": 3
         }
     },
@@ -165,7 +145,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Obama",
-            "selected_by": [],
+            "selected_by": null,
             "question": 3
         }
     },
@@ -174,7 +154,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Romney",
-            "selected_by": [],
+            "selected_by": null,
             "question": 3
         }
     },
@@ -183,7 +163,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Yes",
-            "selected_by": [],
+            "selected_by": null,
             "question": 4
         }
     },
@@ -192,7 +172,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "No",
-            "selected_by": [],
+            "selected_by": null,
             "question": 4
         }
     },
@@ -201,7 +181,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Blondes",
-            "selected_by": [],
+            "selected_by": null,
             "question": 5
         }
     },
@@ -210,7 +190,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Brunettes",
-            "selected_by": [],
+            "selected_by": null,
             "question": 5
         }
     },
@@ -219,7 +199,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "I will take anything.",
-            "selected_by": [],
+            "selected_by": null,
             "question": 5
         }
     },
@@ -228,7 +208,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Meat is delicious.",
-            "selected_by": [],
+            "selected_by": null,
             "question": 6
         }
     },
@@ -237,7 +217,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Eating meat is unhealthy.",
-            "selected_by": [],
+            "selected_by": null,
             "question": 6
         }
     },
@@ -246,7 +226,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "Eating meat is inhumane and uncivilized.",
-            "selected_by": [],
+            "selected_by": null,
             "question": 6
         }
     },
@@ -255,7 +235,7 @@
         "model": "core.answer",
         "fields": {
             "answer": "I can't enjoy a meal unless it once had hopes and dreams.",
-            "selected_by": [],
+            "selected_by": null,
             "question": 6
         }
     }
