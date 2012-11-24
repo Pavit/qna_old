@@ -134,21 +134,12 @@ INSTALLED_APPS = (
     'accounts',
     'social_auth', # pip install django-social-auth
     'core',
-    'ajax_select',
-    'autocomplete_light', # pip install django-autocomplete-light
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
 )
 
-AJAX_LOOKUP_CHANNELS = {
-    #   pass a dict with the model and the field to search against
-    'question'  : {'model':'core.question', 'search_field':'question'}
-}
-# magically include jqueryUI/js/css
-AJAX_SELECT_BOOTSTRAP = True
-AJAX_SELECT_INLINES = 'inline'
 
 #---------django-social-auth settings--------------------
 SOCIAL_AUTH_USER_MODEL = 'accounts.UserProfile'
