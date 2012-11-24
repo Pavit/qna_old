@@ -15,6 +15,7 @@ from accounts.models import UserProfile
 from django.db.models import Q
 from django.conf import settings
 from django.utils import simplejson
+from django import forms
 from django.core import serializers
 from django.contrib.auth.models import User, AnonymousUser
 
@@ -22,8 +23,6 @@ from django.contrib.auth.models import User, AnonymousUser
 
 def previous_question(request, previous_question_pk):
 	previous_question = Question.objects.get(id = previous_question_pk)
-
-	print previous_question
 	resp = {
 		'previous_question': previous_question.question,
 	}
@@ -38,10 +37,17 @@ def previous_question(request, previous_question_pk):
 
 def current_question(request, current_question_pk):
 	current_question = Question.objects.get(id = current_question_pk)
-	context = {
-		'current_question':current_question,
+	answer_dict = {}
+	for a in current_question.answer_set.all():
+		answer_dict[a.id] = a.answer
+	response_dict = {
+		'current_question_title':current_question.question,
+		'current_question_choices': answer_dict,
+		'current_question': current_question,
 	}
-	return render_to_response("current_question.html", context, context_instance=RequestContext(request))
+	#data = simplejson.dumps(response_dict)
+	#return HttpResponse(data, mimetype = "application/json")
+	return render_to_response("current_question.html", response_dict)#, context_instance=RequestContext(request))
 
 def index(request):
 	if request.user.is_authenticated():
@@ -98,9 +104,19 @@ def questions(request):
 		grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'])
 	#current_question = Question.objects.filter(~Q(answered_by = grabuser))[:1].get() #----enable this line to prevent repeating questions
 	current_question = Question.objects.all().order_by('?')[:1].get()
-	context = {'current_question' : current_question,}
+	searchform = SearchForm()
+	context = {'current_question' : current_question,'searchform':searchform,}
 	return render_to_response("questions.html", context, context_instance=RequestContext(request))
 
+def navigation_autocomplete(request, template_name='autocomplete.html'):
+    q = request.GET.get('q', '')
+    context = {'q': q}
+    queries = {}
+    queries['questions'] = Question.objects.filter(
+        Q(question__icontains=q))
+    queries['answers'] = Answer.objects.filter(answer__icontains=q)
+    context.update(queries)
+    return shortcuts.render(request, template_name, context)#, context_instance=RequestContext(request))
 
 @login_required
 def profile(request):
@@ -123,3 +139,24 @@ def logout(request):
 	"""Logs out user"""
 	auth_logout(request)
 	return redirect('landing')
+from ajax_select.fields import AutoCompleteField
+
+class SearchForm(forms.Form):
+
+    q = AutoCompleteField(
+            'question',
+            required=True,
+            help_text="Autocomplete will suggest  about cats, but you can enter anything you like.",
+            label="question",
+            attrs={'size': 100}
+            )
+
+def search_form(request):
+
+    dd = {}
+    if 'q' in request.GET:
+        dd['entered'] = request.GET.get('q')
+    initial = {'q':"\"This is an initial value,\" said O'Leary."}
+    form = SearchForm(initial=initial)
+    dd['form'] = form
+    return render_to_response('search_form.html',dd,context_instance=RequestContext(request))

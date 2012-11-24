@@ -123,7 +123,7 @@ TEMPLATE_DIRS = (
     os.path.join(ROOT_PATH,"templates"),
 )
 
-DATABASES['default']= dj_database_url.config()
+#DATABASES['default']= dj_database_url.config()
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -134,11 +134,21 @@ INSTALLED_APPS = (
     'accounts',
     'social_auth', # pip install django-social-auth
     'core',
+    'ajax_select',
+    'autocomplete_light', # pip install django-autocomplete-light
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
 )
+
+AJAX_LOOKUP_CHANNELS = {
+    #   pass a dict with the model and the field to search against
+    'question'  : {'model':'core.question', 'search_field':'question'}
+}
+# magically include jqueryUI/js/css
+AJAX_SELECT_BOOTSTRAP = True
+AJAX_SELECT_INLINES = 'inline'
 
 #---------django-social-auth settings--------------------
 SOCIAL_AUTH_USER_MODEL = 'accounts.UserProfile'
@@ -148,7 +158,7 @@ LOGIN_ERROR_URL    = '/login-error/'
 
 FACEBOOK_APP_ID = '343120432448964'
 FACEBOOK_API_SECRET= '0809eaae9cae32bf4f3574f47c0fca5e'
-#------------------------------------------------
+#---------------------------------------------------------
 SERIALIZATION_MODULES = {
     'json': 'wadofstuff.django.serializers.json'
 }
