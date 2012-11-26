@@ -6,3 +6,4 @@ httplib2==0.7.2
 wadofstuff-django-serializers
 simplejson==2.3.2
 requests
+django-ajax-selects
