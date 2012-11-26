@@ -18,9 +18,10 @@ from django.utils import simplejson
 from django import forms
 from django.core import serializers
 from django.contrib.auth.models import User, AnonymousUser
+from forms import *
 
-
-
+def test (request):
+	return render_to_response("test.html")
 def previous_question(request, previous_question_pk):
 	previous_question = Question.objects.get(id = previous_question_pk)
 	resp = {
@@ -104,19 +105,19 @@ def questions(request):
 		grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'])
 	#current_question = Question.objects.filter(~Q(answered_by = grabuser))[:1].get() #----enable this line to prevent repeating questions
 	current_question = Question.objects.all().order_by('?')[:1].get()
-	searchform = SearchForm()
-	context = {'current_question' : current_question,'searchform':searchform,}
+
+	context = {'current_question' : current_question,}
 	return render_to_response("questions.html", context, context_instance=RequestContext(request))
 
-def navigation_autocomplete(request, template_name='autocomplete.html'):
-    q = request.GET.get('q', '')
-    context = {'q': q}
-    queries = {}
-    queries['questions'] = Question.objects.filter(
-        Q(question__icontains=q))
-    queries['answers'] = Answer.objects.filter(answer__icontains=q)
-    context.update(queries)
-    return shortcuts.render(request, template_name, context)#, context_instance=RequestContext(request))
+# def navigation_autocomplete(request, template_name='autocomplete.html'):
+#     q = request.GET.get('q', '')
+#     context = {'q': q}
+#     queries = {}
+#     queries['questions'] = Question.objects.filter(
+#         Q(question__icontains=q))
+#     queries['answers'] = Answer.objects.filter(answer__icontains=q)
+#     context.update(queries)
+#     return shortcuts.render(request, template_name, context)#, context_instance=RequestContext(request))
 
 @login_required
 def profile(request):
@@ -139,24 +140,28 @@ def logout(request):
 	"""Logs out user"""
 	auth_logout(request)
 	return redirect('landing')
-from ajax_select.fields import AutoCompleteField
-
-class SearchForm(forms.Form):
-
-    q = AutoCompleteField(
-            'question',
-            required=True,
-            help_text="Autocomplete will suggest  about cats, but you can enter anything you like.",
-            label="question",
-            attrs={'size': 100}
-            )
 
 def search_form(request):
+	return render_to_response("search_form.html")
 
-    dd = {}
-    if 'q' in request.GET:
-        dd['entered'] = request.GET.get('q')
-    initial = {'q':"\"This is an initial value,\" said O'Leary."}
-    form = SearchForm(initial=initial)
-    dd['form'] = form
-    return render_to_response('search_form.html',dd,context_instance=RequestContext(request))
+
+def search(request):
+	data = {}
+	print request.GET
+	if 'searchtext' in request.GET:
+		q = request.GET.get('searchtext')
+		json = serializers.serialize('json', Question.objects.filter(Q(question__icontains=q)).order_by('question'))
+	# 	q = request.GET.get('searchtext')
+	# 	for question in Question.objects.filter(Q(question__icontains=q)).order_by('question'):
+	# 		data[question.question] = question
+	# ser = serializers.serialize(data)
+	# json = simplejson.dumps(ser)
+	print json
+	return HttpResponse(json, mimetype='application/json')
+    # dd = {}
+    # if 'question' in request.GET:
+    #     dd['entered'] = request.GET.get('question')
+    # initial = {'question':"\"This is an initial value,\" said O'Leary."}
+    # form = QuestionForm(initial=initial)
+    # dd['form'] = form
+    # return render_to_response('search_form.html',dd,context_instance=RequestContext(request))

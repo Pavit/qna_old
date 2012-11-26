@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'accounts',
     'social_auth', # pip install django-social-auth
     'core',
+    'ajax_select', # django-ajax-selects
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -155,6 +156,13 @@ SERIALIZATION_MODULES = {
 }
 
 
+#-------------django-ajax-selects settings for autocomplete search bar ----------
+AJAX_LOOKUP_CHANNELS = {
+   # 'question'  : {'model':'core.question', 'search_field':'question'},
+    'question'   : ('core.lookups', 'QuestionLookup'),
+}
+AJAX_SELECT_BOOTSTRAP = True
+AJAX_SELECT_INLINES = 'inline'
 
 
 # A sample logging configuration. The only tangible logging
