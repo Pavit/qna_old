@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+   <script type='text/javascript' src="{% static 'js/smoothscroll.js' %}"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -65,35 +66,23 @@
           });
   });
   </script>
-<div id="current_question">
-    <div class="container">
-        <div class="row">
-            <div class="span2 height2 red">
-                <h1>
-                    Q.
-                </h1>
-                <div class="inner">
-                    <p class="currentquestion">
-                        {{current_question.question}}
-                    </p>
-                </div>
-            </div>
-            <div class="span5 height2 blue">
-                <h1>
-                    A.
-                </h1>
-                <div class="inner">
-                    {% for a in current_question.answer_set.all %} {% csrf_token %}
-                    <a href="#" id="{{a.id}}" type="int" class="answer"><p>{{a.answer}}</p></a>
-                    {%endfor%}
-                </div>
-            </div>
-        </div>
-        <div class="inner">
-            <p class="note">
-                Skip...
-            </p>
-        </div>
-    </div>
+<div id="current_question" class="row">
+	<div class="layout-span7 height2 red">
+		<h1>Q.</h1>
+		<p class="currentquestion">
+		{{current_question.question}}
+		</p>
+		<p class="note"><a href="#previous_question" class="smoothScroll">Last question's results...</a></p>
+	</div>
+</div>
+
+<div id="current_answers" class="row">
+	<div class="span5 height2 blue">
+		<h1>A.</h1>
+		{% for a in current_question.answer_set.all %} {% csrf_token %}
+		<p class="answer text-center"><a href="#" id="{{a.id}}" type="int" class="answer">{{a.answer}}</a></p>
+		{%endfor%}
+		<p class="note">Skip...</p>
+	</div>
 </div>
 
