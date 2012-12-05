@@ -4,67 +4,39 @@
 <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
 {#--------- OTHER JAVASCRIPT STUFF ----------------#}
-  <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-   <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type = "text/javascript" src = "{% static 'js/search.js' %}"></script>
 <script type="text/javascript">
   google.load('visualization', '1', {
     packages: ['corechart']
   });
-  $(document).ready(function() {
-    $('.answer').bind('click', function() {
-      $('.previous_question').fadeOut(300).delay(500);
-      $('#current_question').fadeOut(300);
-      $.get("/vote/" + this.id + "/", function(data) {
-        $('#current_question').html('&nbsp;').load('/current_question/' + data.current_question_pk + "/");
-        $('#current_question').fadeIn(300);
-        $.ajax({
-          url: '/previous_question/' + data.previous_question_pk + "/",
-          success: function(data) {
-            Change(data.answers);
-            $(".previous_question .previousquestion").html(data.previous_question);
-            $(".previous_question").fadeIn(300);
-          }
-        });
+</script>
+<script>
+$(document).ready(function() {
+  $('.answer').bind('click', function() {
+    $('.previous_question').fadeOut(300).delay(500);
+    $('#current_question').fadeOut(300);
+    $.get("/vote/" + this.id + "/", function(data) {
+      $('#current_question').html('&nbsp;').load('/current_question/' + data.current_question_pk + "/");
+      $('#current_question').fadeIn(300);
+      $.ajax({
+        url: '/previous_question/' + data.previous_question_pk + "/",
+        success: function(data) {
+          Change(data.answers);
+          $(".previous_question .previousquestion").html(data.previous_question);
+          $(".previous_question").fadeIn(300);
+        }
       });
     });
   });
- </script>
-<script>
-  $(document).ready(function() {
-          $("#search").autocomplete({
-              source: function (request, response) {
-                $.ajax({
-                      url: "{% url search %}?searchtext="  + request.term,
-                      type: "GET",
-                      success: function (data) {
-                        console.log(data);
-                          response($.map(data, function (item) {
-                              return {
-                                  label: item.fields.question,
-                                  value: item.pk
-                            }
-                          }));
-                      },
-                      data: request.term,
-                      dataType: "json"
-                  });
-              },
-             select: function(event, ui) {
-              console.log(ui);
-              var url = "/current_question/"+ui.item.value;
-               $('.previous_question').fadeOut(300);
-              $('#current_question').delay(200).fadeOut(300);
-                      $('#current_question').html('&nbsp;').load(url);
-        $('#current_question').fadeIn(300);
-        $('.previous_question').fadeIn(300);
-            
-             }
-          });
-  });
-  </script>
+});
+</script>
+
+
 <div id="current_question">
     <div class="container">
         <div class="row">

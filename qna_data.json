@@ -60,6 +60,96 @@
         }
     },
     {
+        "pk": 7,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "What is the solution to 48÷2(9+3)?"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "What is your favorite wall material?"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "Who would win in a fight?"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "Who has the most leadership?"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "Do you enjoy having photos taken of you?"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "Would you ever consider going to a Black Friday sale?"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "Who is the greatest bald character of all time?"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "What would you do if you got a tattoo of your significant other and then broke up with him/her?"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "core.question",
+        "fields": {
+            "date": "2012-11-12",
+            "submitter": null,
+            "answered_by": [],
+            "question": "Would you have the balls to punch a shark in the face?"
+        }
+    },
+    {
         "pk": 1,
         "model": "core.answer",
         "fields": {
@@ -237,6 +327,357 @@
             "answer": "I can't enjoy a meal unless it once had hopes and dreams.",
             "selected_by": [],
             "question": 6
+        }
+    },
+    {
+        "pk": 21,
+        "model": "core.answer",
+        "fields": {
+            "answer": "2",
+            "selected_by": [],
+            "question": 7
+        }
+    },
+    {
+        "pk": 22,
+        "model": "core.answer",
+        "fields": {
+            "answer": "288",
+            "selected_by": [],
+            "question": 7
+        }
+    },
+    {
+        "pk": 23,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Leave me alone, I just wanted to study literature!",
+            "selected_by": [],
+            "question": 7
+        }
+    },
+    {
+        "pk": 24,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Exposed brick.",
+            "selected_by": [],
+            "question": 8
+        }
+    },
+    {
+        "pk": 25,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Wood panel.",
+            "selected_by": [],
+            "question": 8
+        }
+    },
+    {
+        "pk": 26,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Concrete.",
+            "selected_by": [],
+            "question": 8
+        }
+    },
+    {
+        "pk": 27,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Tiles.",
+            "selected_by": [],
+            "question": 8
+        }
+    },
+    {
+        "pk": 28,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Plaster.",
+            "selected_by": [],
+            "question": 8
+        }
+    },
+    {
+        "pk": 29,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Superman",
+            "selected_by": [],
+            "question": 9
+        }
+    },
+   {
+        "pk": 30,
+        "model": "core.answer",
+        "fields": {
+            "answer": "The Hulk",
+            "selected_by": [],
+            "question": 9
+        }
+    },
+   {
+        "pk": 31,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Thor",
+            "selected_by": [],
+            "question": 9
+        }
+    },
+   {
+        "pk": 32,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Goku",
+            "selected_by": [],
+            "question": 9
+        }
+    },
+   {
+        "pk": 33,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Batman",
+            "selected_by": [],
+            "question": 9
+        }
+    },
+   {
+        "pk": 34,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Captain America",
+            "selected_by": [],
+            "question": 10
+        }
+    },
+   {
+        "pk": 35,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Optimus Prime",
+            "selected_by": [],
+            "question": 10
+        }
+    },
+   {
+        "pk": 36,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Leonardo",
+            "selected_by": [],
+            "question": 10
+        }
+    },
+   {
+        "pk": 37,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Captain Kirk",
+            "selected_by": [],
+            "question": 10
+        }
+    },
+   {
+        "pk": 38,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Duke",
+            "selected_by": [],
+            "question": 10
+        }
+    },
+   {
+        "pk": 39,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Only if I’ve had time to get ready.",
+            "selected_by": [],
+            "question": 11
+        }
+    },
+   {
+        "pk": 40,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Never.",
+            "selected_by": [],
+            "question": 11
+        }
+    },
+   {
+        "pk": 41,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Always.",
+            "selected_by": [],
+            "question": 11
+        }
+    },
+   {
+        "pk": 42,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Only if the background has lasers.",
+            "selected_by": [],
+            "question": 11
+        }
+    },
+   {
+        "pk": 43,
+        "model": "core.answer",
+        "fields": {
+            "answer": "I go every year.",
+            "selected_by": [],
+            "question": 12
+        }
+    },
+   {
+        "pk": 44,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Only if there’s something I really want.",
+            "selected_by": [],
+            "question": 12
+        }
+    },
+   {
+        "pk": 45,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Hell no, I value my life too much.",
+            "selected_by": [],
+            "question": 12
+        }
+    },
+   {
+        "pk": 46,
+        "model": "core.answer",
+        "fields": {
+            "answer": "No, I just order everything online.",
+            "selected_by": [],
+            "question": 12
+        }
+    },
+   {
+        "pk": 47,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Professor X",
+            "selected_by": [],
+            "question": 13
+        }
+    },
+   {
+        "pk": 48,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Charlie Brown",
+            "selected_by": [],
+            "question": 13
+        }
+    },
+   {
+        "pk": 49,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Captain Picard",
+            "selected_by": [],
+            "question": 13
+        }
+    },
+   {
+        "pk": 50,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Morpheus",
+            "selected_by": [],
+            "question": 13
+        }
+    },
+   {
+        "pk": 51,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Captain Kirk",
+            "selected_by": [],
+            "question": 13
+        }
+    },
+   {
+        "pk": 52,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Laser removal.",
+            "selected_by": [],
+            "question": 14
+        }
+    },
+   {
+        "pk": 53,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Keep it as is.",
+            "selected_by": [],
+            "question": 14
+        }
+    },
+   {
+        "pk": 54,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Modify it so that it insults them.",
+            "selected_by": [],
+            "question": 14
+        }
+    },
+   {
+        "pk": 55,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Cover it with something cool looking.",
+            "selected_by": [],
+            "question": 14
+        }
+    },
+   {
+        "pk": 56,
+        "model": "core.answer",
+        "fields": {
+            "answer": "If I was drunk.",
+            "selected_by": [],
+            "question": 15
+        }
+    },
+   {
+        "pk": 57,
+        "model": "core.answer",
+        "fields": {
+            "answer": "I punch sharks in the faces all the time.",
+            "selected_by": [],
+            "question": 15
+        }
+    },
+   {
+        "pk": 58,
+        "model": "core.answer",
+        "fields": {
+            "answer": "Maybe if it was eating my leg.",
+            "selected_by": [],
+            "question": 15
+        }
+    },
+   {
+        "pk": 59,
+        "model": "core.answer",
+        "fields": {
+            "answer": "No, I’d just start crying or something.",
+            "selected_by": [],
+            "question": 15
         }
     }
 ]

@@ -16,10 +16,16 @@
 	                    type: "GET",
 	                    success: function (data) {
 	                    	console.log(data);
+                            var viewall = [{
+                                fields: {question: "View all search results"},
+                                get_absolute_url: "<a href='/searchresults/'>View all search results<a>",
+                                fulfills_required: false
+                            }];
+                            data.splice(6, 0, lastitem[0]);
 	                        response($.map(data, function (item) {
 	                            return {
 	                                label: item.fields.question,
-	                                value: item.pk
+	                                value: item.get_absolute_url
 	                        	}
 	                        }));
 	                    },
@@ -28,9 +34,7 @@
 	                });
 	            },
 	           select: function(event, ui) {
-	           	console.log(ui);
-	           	var url = "/current_question/"+ui.item.value;
-	           	window.open(url)
+	           	window.open(ui.item.value)
 	           }
 	        });
 	});

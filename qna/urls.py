@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^search_form',  'core.views.search_form',name='search_form'),
+    url(r'^search_results',  'core.views.search_results',name='search_results'),
+    url(r'^submit',  'core.views.submit',name='submit'),
     url(r'^test',  'core.views.test',name='test'),
     (r'^admin/lookups/', include(ajax_select_urls)),
 )

@@ -11,11 +11,13 @@
 
 
 {# --------- LOAD JQUERY AND GOOGLE CHART API -------------#}
-  <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-   <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type = "text/javascript" src = "{% static 'js/search.js' %}"></script>
+
 <script type="text/javascript">
 google.load("visualization", "1", { packages: ["corechart"] });
 var chart;
@@ -36,64 +38,12 @@ function Change(s) {
    }
   }
 </script>
-<script>
-  $(document).ready(function() {
-          $("#search").autocomplete({
-              source: function (request, response) {
-                $.ajax({
-                      url: "{% url search %}?searchtext="  + request.term,
-                      type: "GET",
-                      success: function (data) {
-                        console.log(data);
-                          response($.map(data, function (item) {
-                              return {
-                                  label: item.fields.question,
-                                  value: item.pk
-                            }
-                          }));
-                      },
-                      data: request.term,
-                      dataType: "json"
-                  });
-              },
-             select: function(event, ui) {
-              console.log(ui);
-              var url = "/current_question/"+ui.item.value;
-               $('.previous_question').fadeOut(300);
-              $('#current_question').fadeOut(300);
-                      $('#current_question').html('&nbsp;').load(url);
-        $('#current_question').fadeIn(300);
-        $('.previous_question').fadeIn(300);
-            
-             }
-          });
-  });
-  </script>
+
 </head>
 
 <body>
 
-<div class="container">
-    <div class="header">
-        <a class="brand">QNA</a>
-        <form class="search pull-right">
-          <div class = "ui-widget"><label for "search">Search...</label>
-            <input id="search"/>
-          </div>
-        </form>
-        <ul class="nav pull-right">
-            <li>
-                <a href="#">Submit</a>
-            </li>
-            <li>
-                <a href="#">Profile</a>
-            </li>
-            <li>
-                <a href="#">Login</a>
-            </li>
-        </ul>
-    </div>
-</div>
+{% include "navbar.html" %}
 
 {#################### START CURRENT QUESTION #########################}
 <div id = "current_question">
@@ -101,6 +51,9 @@ function Change(s) {
 </div>
 {#################### END CURRENT QUESTION #########################}
 
+<div id = "search_results">
+{% include "search_results.html" %}
+</div>
 
 {#################### START PREVIOUS QUESTION #########################}
 <div class = "previous_question">
