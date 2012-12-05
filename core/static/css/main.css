@@ -29,12 +29,12 @@ footer	{
 
 /* Header */
 
-.header	{
+#nav	{
 		background-color: #494949;
 		color: #ffffff;
 		height: 100px;
 		width: 770px;
-		margin: 20px auto;
+		margin: 15px auto;
 		padding: 0 20px;
 		box-sizing: border-box;   
 			-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -81,11 +81,12 @@ footer	{
 /* Layout Classes */
 
 .row		{
-		margin-bottom: 20px;
+		margin-bottom: 15px;
 		overflow: hidden;
 		position: relative;
 }
 
+.height1	{height: 100px;}
 .height2	{height: 200px;}
 .height3	{height: 300px;}
 .height4	{height: 400px;}

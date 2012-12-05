@@ -11,9 +11,16 @@
 
 
 {# --------- LOAD JQUERY AND GOOGLE CHART API -------------#}
+<<<<<<< HEAD
 <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+=======
+  <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+   <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+   <script type='text/javascript' src="{% static 'js/smoothscroll.js' %}"></script>
+>>>>>>> a439c9229566f349427296fb1d841bd9ac6a1243
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type = "text/javascript" src = "{% static 'js/search.js' %}"></script>
@@ -46,7 +53,7 @@ function Change(s) {
 {% include "navbar.html" %}
 
 {#################### START CURRENT QUESTION #########################}
-<div id = "current_question">
+<div id="current_question">
 {% include "current_question.html" %}
 </div>
 {#################### END CURRENT QUESTION #########################}
@@ -56,9 +63,8 @@ function Change(s) {
 </div>
 
 {#################### START PREVIOUS QUESTION #########################}
-<div class = "previous_question">
-  <div class="container">
-      <div class="row">
+<div class="previous_question">
+      <div id="previous_question" class="row">
           <div class="span7 height3 gray">
               <div class="inner-box2">
                   <h2>
@@ -73,10 +79,8 @@ function Change(s) {
                   </p>
                 <div id="visualization"></div>
               </div>
-
           </div>
-      </div>
-  </div>    
+      </div> 
 </div>
 {#################### END PREVIOUS QUESTION #########################}
 
