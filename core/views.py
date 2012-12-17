@@ -22,20 +22,20 @@ from forms import *
 
 def test (request):
 	return render_to_response("test.html")
-
+	
 def previous_question(request, previous_question_pk):
 	previous_question = Question.objects.get(id = previous_question_pk)
 	resp = {
-		'previous_question': previous_question.question,
+		'previous_question': previous_question,
 	}
-	answer_list =[]
-	answer_list.append(["Answer", "Votes"])
-	for a in previous_question.answer_set.all():
-		answer_list.append([a.answer, a.get_vote_count()])
-	resp["answers"] = answer_list
-	data = simplejson.dumps(resp)
-	return HttpResponse(data, mimetype = "application/json")
-	#return render_to_response("previous_question.html", {"data": resp, "previous_question":previous_question})
+	# answer_list =[]
+	# answer_list.append(["Answer", "Votes"])
+	# for a in previous_question.answer_set.all():
+	# 	answer_list.append([a.answer, a.get_vote_count()])
+	# resp["answers"] = answer_list
+	#data = simplejson.dumps(resp)
+	#return HttpResponse(data, mimetype = "application/json")
+	return render_to_response("previous_question.html", resp, context_instance=RequestContext(request))
 
 def current_question(request, current_question_pk):
 	current_question = Question.objects.get(id = current_question_pk)
@@ -49,7 +49,6 @@ def current_question(request, current_question_pk):
 	}
 	#data = simplejson.dumps(response_dict)
 	#return HttpResponse(data, mimetype = "application/json")
-	print current_question.get_absolute_url()
 	return render_to_response("current_question.html", response_dict)#, context_instance=RequestContext(request))
 
 def index(request):
@@ -63,6 +62,7 @@ def index(request):
 			previous_question = request.GET.get('current_question')[0]
 		except:
 			pass
+		# return redirect('poll/polls')
 		return render_to_response("results.html", {
 			'current_question':current_question,
 			'previous_question': previous_question,
@@ -92,9 +92,17 @@ def vote(request, answer_id):
 		voted_answer.save()
 		vote.save()
 		current_question = Question.objects.filter(~Q(id = previous_question.id)).order_by('?')[:1].get()
+		answer_list =[]
+		answer_list.append(["Answer", "Votes"])
+		for a in previous_question.answer_set.all():
+			answer_list.append([a.answer, a.get_vote_count()])
+		#resp["answers"] = answer_list
 		data = {
 			"previous_question_pk":previous_question.id,
 			"current_question_pk":current_question.id,
+			"previous_question":previous_question.question,
+			"previousanswers": answer_list,
+
 		}
 	json = simplejson.dumps(data)
 	return HttpResponse(json, mimetype='application/json')
@@ -110,14 +118,31 @@ def questions(request):
 	context = {'current_question' : current_question,}
 	return render_to_response("questions.html", context, context_instance=RequestContext(request))
 
+# def navigation_autocomplete(request, template_name='autocomplete.html'):
+#     q = request.GET.get('q', '')
+#     context = {'q': q}
+#     queries = {}
+#     queries['questions'] = Question.objects.filter(
+#         Q(question__icontains=q))
+#     queries['answers'] = Answer.objects.filter(answer__icontains=q)
+#     context.update(queries)
+#     return shortcuts.render(request, template_name, context)#, context_instance=RequestContext(request))
+
 @login_required
 def profile(request):
 	user = UserProfile.objects.get(username = request.user.username)
 	user.populate_graph_info()
 	user.save()
+	print user.birthday
 	uservotes = user.vote_set.all()
+	print uservotes
 	pollcount = Poll.objects.all().count()
-
+	print "questions you submit:"
+	print user.submissions.all()
+	print "questions you answered:"
+	print user.answered.all()
+	for p in Poll.objects.all():
+		print p.tags
 	return render_to_response("profile.html", {'user': user, 'pollcount':pollcount,'APP_ID': settings.FACEBOOK_APP_ID}, context_instance = RequestContext(request))
 
 def logout(request):
@@ -128,25 +153,24 @@ def logout(request):
 def search_form(request):
 	return render_to_response("search_form.html")
 
-def search_results(request):
-	if 'searchtext' in request.GET:
-		q = request.GET.get('searchtext')
-		results =  Question.objects.filter(Q(question__icontains=q))
-	return render_to_response("search_results.html", {'results':results})
-	
-def submit(request):
-	return render_to_response("submit.html")
 
 def search(request):
 	data = {}
 	print request.GET
 	if 'searchtext' in request.GET:
 		q = request.GET.get('searchtext')
-		queryset =  Question.objects.filter(Q(question__icontains=q))
-		search_list = []
-		for question in queryset:
-			search_list.append({'question': question.question, 'url':question.get_absolute_url()})
-		json = simplejson.dumps(search_list)
-		#json = serializers.serialize('json', queryset, indent = 4, extras=('get_absolute_url'))
-		return HttpResponse(json, mimetype='application/json')
+		json = serializers.serialize('json', Question.objects.filter(Q(question__icontains=q)).order_by('question'))
+	# 	q = request.GET.get('searchtext')
+	# 	for question in Question.objects.filter(Q(question__icontains=q)).order_by('question'):
+	# 		data[question.question] = question
+	# ser = serializers.serialize(data)
+	# json = simplejson.dumps(ser)
+	print json
 	return HttpResponse(json, mimetype='application/json')
+    # dd = {}
+    # if 'question' in request.GET:
+    #     dd['entered'] = request.GET.get('question')
+    # initial = {'question':"\"This is an initial value,\" said O'Leary."}
+    # form = QuestionForm(initial=initial)
+    # dd['form'] = form
+    # return render_to_response('search_form.html',dd,context_instance=RequestContext(request))

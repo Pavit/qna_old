@@ -134,8 +134,6 @@ INSTALLED_APPS = (
     'accounts',
     'social_auth', # pip install django-social-auth
     'core',
-    'wadofstuff',
-    'ajax_select', # django-ajax-selects
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -153,17 +151,11 @@ FACEBOOK_APP_ID = '343120432448964'
 FACEBOOK_API_SECRET= '0809eaae9cae32bf4f3574f47c0fca5e'
 #---------------------------------------------------------
 SERIALIZATION_MODULES = {
-    'json': 'wadofstuff.django.serializers.json',
+    'json': 'wadofstuff.django.serializers.json'
 }
 
 
-#-------------django-ajax-selects settings for autocomplete search bar ----------
-AJAX_LOOKUP_CHANNELS = {
-   # 'question'  : {'model':'core.question', 'search_field':'question'},
-    'question'   : ('core.lookups', 'QuestionLookup'),
-}
-AJAX_SELECT_BOOTSTRAP = True
-AJAX_SELECT_INLINES = 'inline'
+
 
 
 # A sample logging configuration. The only tangible logging

@@ -21,9 +21,6 @@ class Question(models.Model):
 	def __unicode__(self):
 		return self.question
 
-	def get_absolute_url(self):
-	    return '/current_question/%s' % self.pk
-
 	def get_vote_count(self):
 		return Vote.objects.filter(question=self).count()
 

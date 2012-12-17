@@ -1,61 +1,48 @@
-{% for label, value in data.items %}
-{{label}}:{{value}}
-{%endfor%}
+
     {% load staticfiles %}
-  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href="{% static 'css/main.css' %}" rel="stylesheet">
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
 <script type="text/javascript">
-    google.load('visualization', '1', {packages: ['corechart']});
+  $(document).ready(function() {
+    google.load("visualization", "1", { packages: ["corechart"] });
+    var chartdata;
+    chartdata = [
+    ['Answer', 'Votes'],
+    {%for answer in previous_question.answer_set.all %}
+    ['{{answer.answer}}', {{answer.get_vote_count}}],
+    {% endfor %}
+    ];
+    var datatable = google.visualization.arrayToDataTable(chartdata);
+    chart = new google.visualization.PieChart(document.getElementById('visualization'));
+    options = {
+      'backgroundColor': "cccbc7",
+      'sliceVisibilityThreshold':0,
+      'width':"100%",
+      'height':"100%"
+    };
+    chart.draw(datatable, options);
+  });
  </script>
 
-
-<div class="container">
-    {% load core_tags %}
-    <div class="row">
-        <div class="span7 height2 gray">
-            <div class="inner-box2">
-                <h2>
-                    Previously...
-                </h2>
-                <p class="previousquestion">
-                    {{ previous_question.question }}
-                    
-                </p>
-            </div>
-            <div class="inner-box4">
+<div id = "previous_question">
+  <div class="container">
+      <div class="row">
+          <div class="span7 height3 gray">
+              <div class="inner-box2">
+                  <h2>
+                      Previously...
+                  </h2>
+                  {{previous_question.question}}
+                  </p>
+              </div>
+              <div class="inner-box4">
+                  <p class="note">
+                      More...
+                  </p>
                 <div id="visualization"></div>
-     <script type="text/javascript">
-      function drawVisualization() {
-        // Create and populate the data table.
-        var stuff = google.visualization.arrayToDataTable([
-          ['Answer Choice', 'Votes'],
-          {%for label,value in data.items %}
-          ['{{label}}', {{value}}],
-          {%endfor%}
-        ]);
+              </div>
 
-        var options = {
-            title:"",
-            backgroundColor: "#cccbc7",
-            legend: {position: 'right', alignment:'center', textStyle: {color: 'white', fontSize: 12}},
-            titleTextStyle: {color: 'white', fontName: 'Arial', fontSize: 15},
-            chartArea:{left:0,top:0,width:"100%",height:"100%"},
-            colors: ['f15c22', '000000','73a1d5','ffffff' ]
-            }
-        // Create and draw the visualization.
-        new google.visualization.PieChart(document.getElementById('visualization')).
-            draw(stuff, options);
-      }
-      google.setOnLoadCallback(drawVisualization);
-    </script>
-
-
-                <p class="note">
-                    More...
-                </p>
-            </div>
-        </div>
-    </div>
-</div>    
+          </div>
+      </div>
+  </div>    
+</div>
