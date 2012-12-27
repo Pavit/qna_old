@@ -1,33 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>QNA</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <title>QNA</title>
 
-{# --------- CSS STUFF -------------#}
-{% load staticfiles %}
-<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-<link href="{% static 'css/main.css' %}" rel="stylesheet">
+  <!-- Include Font Files -->
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
+  <!-- Include CSS Files -->
+  {% load staticfiles %}
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="{% static 'stylesheets/foundation.min.css' %}">
+  <link rel="stylesheet" href="{% static 'stylesheets/app.css' %}">
+</head>
+
+<body>
+
+<div class="row">
+  <div class="twelve columns">
+  <nav class="top-bar">
+    <ul>
+      <li class="name"><h1><a href="#">QNA</a></h1></li>
+      <li class="toggle-topbar"><a href="#"></a></li>
+    </ul>
+    <section>
+      <ul class="right">
+        <li><a href="#">SUBMIT</a></li>
+        <li><a href="#">PROFILE</a></li>
+        <li><a href="#">LOGIN</a></li>
+        <li class="search">
+          <form>
+            <input id="search" type="search" class="search-query" placeholder="Search..." />
+          </form>
+        </li>
+      </ul>
+    </section>
+  </nav>
+  </div>
+</div>
+
+<div id="current_question"></div>
+
+<div id="previous_question"></div>
 
 {# --------- LOAD JQUERY AND GOOGLE CHART API -------------#}
-  <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-   <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js"></script>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-
 <script type="text/javascript">
-  google.load('visualization', '1', {
-    packages: ['corechart']
-  });
+  google.load("visualization", "1", { packages: ["corechart"] });
   $(document).ready(function() {
     {% if current_question %}
     $('#current_question').html('&nbsp;').load('/current_question/' + {{current_question.id}} + "/");
     {% endif %}
     $('.answer').bind('click', function() {
-      $('#previous_question').fadeOut(300);
-      $('#current_question').fadeOut(300);
+        $('#previous_question','#current_question').fadeOut(300);
         $.ajax({
           url: '/vote/' + this.id + "/",
           success: function(data) {
@@ -35,42 +68,58 @@
             $('#current_question').html('&nbsp;').load('/current_question/' + data.current_question_pk + "/");
             $('#current_question').fadeIn(300);
             $('#previous_question').html('&nbsp;').load('/previous_question/' + data.previous_question_pk + "/");
-            $("#previous_question").fadeIn(300);
+            $('#previous_question').fadeIn(300);
           }
         });
 
     });
   });
- </script>
-</head>
+</script>
+<script>
+  $(document).ready(function() {
+          $("#search").autocomplete({
+              source: function (request, response) {
+                $.ajax({
+                      url: "{% url search %}?searchtext="  + request.term,
+                      type: "GET",
+                      success: function (data) {
+                        console.log(data);
+                          response($.map(data, function (item) {
+                              return {
+                                  label: item.fields.question,
+                                  value: item.pk
+                            }
+                          }));
+                      },
+                      data: request.term,
+                      dataType: "json"
+                  });
+              },
+             select: function(event, ui) {
+              console.log(ui);
+              var url = "/current_question/"+ui.item.value;
+               $('#previous_question').fadeOut(300);
+              $('#current_question').delay(200).fadeOut(300);
+                      $('#current_question').html('&nbsp;').load(url);
+        $('#current_question').fadeIn(300);
+        $('#previous_question').fadeIn(300);
+            
+             }
+          });
+  });
+  </script>
 
-<body>
-
-<div class="container">
-    <div class="header">
-        <a class="brand">QNA</a>
-{% include "search_form.html" %}
-        <ul class="nav pull-right">
-            <li>
-                <a href="#">Submit</a>
-            </li>
-            <li>
-                <a href="#">Profile</a>
-            </li>
-            <li>
-                <a href="#">Login</a>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<div id = "current_question"></div>
-
-<div id = "previous_question"></div>
-
-<footer>
-<p>Copyright gibberish.</p>
-</footer>
-
+  <!-- Included JS Files (Uncompressed) -->
+  <!--
+  <script src="javascripts/jquery.js"></script><script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script><script src="javascripts/jquery.foundation.forms.js"></script><script src="javascripts/jquery.foundation.reveal.js"></script><script src="javascripts/jquery.foundation.orbit.js"></script><script src="javascripts/jquery.foundation.navigation.js"></script><script src="javascripts/jquery.foundation.buttons.js"></script><script src="javascripts/jquery.foundation.tabs.js"></script><script src="javascripts/jquery.foundation.tooltips.js"></script><script src="javascripts/jquery.foundation.accordion.js"></script><script src="javascripts/jquery.placeholder.js"></script><script src="javascripts/jquery.foundation.alerts.js"></script><script src="javascripts/jquery.foundation.topbar.js"></script><script src="javascripts/jquery.foundation.joyride.js"></script><script src="javascripts/jquery.foundation.clearing.js"></script><script src="javascripts/jquery.foundation.magellan.js"></script>
+  -->
+  
+  <!-- Included JS Files (Compressed) -->
+  <script src="{% static 'javascripts/modernizr.foundation.js' %}"></script>
+  <script src="{% static 'javascripts/jquery.js' %}"></script>
+  <script src="{% static 'javascripts/foundation.min.js' %}"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="{% static 'javascripts/app.js' %}"></script>
 </body>
 </html>

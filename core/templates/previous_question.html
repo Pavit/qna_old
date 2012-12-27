@@ -1,6 +1,17 @@
+<div id="previous_question" class="row">
+  <div class="twelve columns">
+    <div class="panel gray">
+      <div class="row">
+        <div class="twelve columns">
+          <p class="previous_question text-center">{{previous_question.question}}</p>
+          <div id="visualization"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    {% load staticfiles %}
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -16,33 +27,9 @@
     chart = new google.visualization.PieChart(document.getElementById('visualization'));
     options = {
       'backgroundColor': "cccbc7",
-      'sliceVisibilityThreshold':0,
-      'width':"100%",
-      'height':"100%"
+      'colors': ['#f15c22', '#eb4f68', '#eb62ca', '#9567eb', '#73a1d5'],
+      'sliceVisibilityThreshold':0
     };
     chart.draw(datatable, options);
   });
  </script>
-
-<div id = "previous_question">
-  <div class="container">
-      <div class="row">
-          <div class="span7 height3 gray">
-              <div class="inner-box2">
-                  <h2>
-                      Previously...
-                  </h2>
-                  {{previous_question.question}}
-                  </p>
-              </div>
-              <div class="inner-box4">
-                  <p class="note">
-                      More...
-                  </p>
-                <div id="visualization"></div>
-              </div>
-
-          </div>
-      </div>
-  </div>    
-</div>

@@ -1,11 +1,4 @@
-{# --------- CSS STUFF -------------#}
-{% load staticfiles %}
-<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-<link href="{% static 'css/main.css' %}" rel="stylesheet">
 <script type="text/javascript">
-  google.load('visualization', '1', {
-    packages: ['corechart']
-  });
   $(document).ready(function() {
     $('.answer').bind('click', function() {
       $('#previous_question').fadeOut(300);
@@ -13,6 +6,7 @@
         $.ajax({
           url: '/vote/' + this.id + "/",
           success: function(data) {
+            $('#previous_question').fadeOut(300);
             $('#current_question').html('&nbsp;').load('/current_question/' + data.current_question_pk + "/");
             $('#current_question').fadeIn(300);
             $('#previous_question').html('&nbsp;').load('/previous_question/' + data.previous_question_pk + "/");
@@ -24,36 +18,28 @@
   });
  </script>
 
-<div id="current_question">
-    <div class="container">
-        <div class="row">
-            <div class="span2 height2 red">
-                <h1>
-                    Q.
-                </h1>
-                <div class="inner">
-                    <p class="currentquestion">
-                        {{current_question.question}}
-                    </p>
-                </div>
-            </div>
-            <div class="span5 height2 blue">
-                <h1>
-                    A.
-                </h1>
-                <div class="inner">
-                    {% for a in current_question.answer_set.all %} {% csrf_token %}
-                    <a href="#" id="{{a.id}}" type="int" class="answer"><p>{{a.answer}}</p></a>
-                    {%endfor%}
-                </div>
-            </div>
+<div id="current_question" class="row">
+  <div class="twelve columns">
+    <div class="panel red">
+      <div class="row">
+        <div class="twelve columns">
+          <p class="current_question text-center">{{current_question.question}}</p>
         </div>
-        <div class="inner">
-            <p class="note">
-                Skip...
-            </p>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
-<div id = "previous_question"></div>
+<div id="current_answers" class="row">
+  <div class="twelve columns">
+    <div class="panel blue">
+      <div class="row">
+        <div class="twelve columns">
+          {% for a in current_question.answer_set.all %} {% csrf_token %}
+          <a href="#" id="{{a.id}}" type="int" class="answer"><p class="current_answers text-center">{{a.answer}}</p></a>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
