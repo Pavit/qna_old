@@ -4,8 +4,13 @@
       <div class="row">
         <div class="twelve columns">
           <p class="previous_question text-center">{{previous_question.question}}</p>
-          <div id="visualization"></div>
         </div>
+      </div>
+      <div class="row">
+          <div class="eight columns centered">
+          <div id="visualization"></div>
+          </div>
+      </div>
       </div>
     </div>
   </div>
@@ -26,9 +31,11 @@
     var datatable = google.visualization.arrayToDataTable(chartdata);
     chart = new google.visualization.PieChart(document.getElementById('visualization'));
     options = {
-      'backgroundColor': "cccbc7",
+      'backgroundColor': "transparent",
       'colors': ['#f15c22', '#eb4f68', '#eb62ca', '#9567eb', '#73a1d5'],
-      'sliceVisibilityThreshold':0
+      'sliceVisibilityThreshold':0,
+      'chartArea': {'width':"100%",'height':"80%"},
+      'legend': {'position': 'bottom'}
     };
     chart.draw(datatable, options);
   });
