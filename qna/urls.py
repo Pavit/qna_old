@@ -2,13 +2,14 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 
 
-from ajax_select import urls as ajax_select_urls
+
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
 
     url(r'^$', 'core.views.index', name='index'),
+    url(r'^(?P<slug>[-\w\d]+),(?P<id>\d+)/$', 'core.views.view_question', name='view_question'),
     # url(r'^qna/', include('qna.foo.urls')),
 	url(r'', include('social_auth.urls')),
 	url(r'^questions/$', 'core.views.questions', name='questions'),
@@ -24,5 +25,4 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^search_form',  'core.views.search_form',name='search_form'),
     url(r'^test',  'core.views.test',name='test'),
-    (r'^admin/lookups/', include(ajax_select_urls)),
 )

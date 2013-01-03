@@ -11,8 +11,9 @@ class Question(models.Model):
 	date = models.DateField(default=datetime.date.today)
 	submitter = models.ForeignKey(UserProfile, null=True, blank=True, default=None, related_name='submissions')
 	answered_by = models.ManyToManyField(UserProfile, null=True, blank=True, default=None, related_name = 'answered')
-	#tags = TagAutocompleteTagItField(max_tags=False) 
-	
+	slug = models.SlugField(blank = True, null=True)
+	#tags = TagAutocompleteTagItField(max_tags=False)
+
 	class Meta:
 		ordering = ['-date']
 		verbose_name = _('question')
@@ -35,7 +36,7 @@ class Answer(models.Model):
 	class Meta:
 		verbose_name = _('answer')
 		verbose_name_plural = _('answers')
-		
+
 	def __unicode__(self):
 		return u'%s' % (self.answer,)
 
@@ -47,7 +48,7 @@ class Answer(models.Model):
 
 	def get_vote_count_female(self):
 		return self.selected_by.filter(gender="female").count()
-		
+
 	vote_count = property(fget=get_vote_count)
 	vote_count_male = property(fget=get_vote_count_male)
 	vote_count_female = property(fget=get_vote_count_female)
