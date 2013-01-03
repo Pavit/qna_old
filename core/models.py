@@ -11,7 +11,7 @@ class Question(models.Model):
 	date = models.DateField(default=datetime.date.today)
 	submitter = models.ForeignKey(UserProfile, null=True, blank=True, default=None, related_name='submissions')
 	answered_by = models.ManyToManyField(UserProfile, null=True, blank=True, default=None, related_name = 'answered')
-	slug = models.SlugField(blank = True, null=True)
+	slug = models.SlugField(max_length = 250, blank = True, null=True)
 	#tags = TagAutocompleteTagItField(max_tags=False)
 
 	class Meta:
