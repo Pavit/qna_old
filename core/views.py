@@ -1,3 +1,25 @@
+import httplib, ssl, urllib2, socket
+class HTTPSConnectionV3(httplib.HTTPSConnection):
+    def __init__(self, *args, **kwargs):
+        httplib.HTTPSConnection.__init__(self, *args, **kwargs)
+
+    def connect(self):
+        sock = socket.create_connection((self.host, self.port), self.timeout)
+        if self._tunnel_host:
+            self.sock = sock
+            self._tunnel()
+        try:
+            self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file, ssl_version=ssl.PROTOCOL_SSLv3)
+        except ssl.SSLError, e:
+            print("Trying SSLv3.")
+            self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file, ssl_version=ssl.PROTOCOL_SSLv23)
+
+class HTTPSHandlerV3(urllib2.HTTPSHandler):
+    def https_open(self, req):
+        return self.do_open(HTTPSConnectionV3, req)
+
+urllib2.install_opener(urllib2.build_opener(HTTPSHandlerV3()))
+
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -5,13 +27,13 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
 from django.contrib.messages.api import get_messages
 from datetime import date, datetime
-# from social_auth import __version__ as version
-# from social_auth.utils import setting
+from social_auth import __version__ as version
+from social_auth.utils import setting
 from models import Question, Answer, Vote
 from pprint import pprint
-# from social_auth.models import UserSocialAuth
+from social_auth.models import UserSocialAuth
 from accounts.models import UserProfile
-# from facepy import GraphAPI
+from facepy import GraphAPI
 from django.db.models import Q
 from django.conf import settings
 from django.utils import simplejson
@@ -19,6 +41,7 @@ from django import forms
 from django.core import serializers
 from django.contrib.auth.models import User, AnonymousUser
 from forms import *
+
 
 def test (request):
 	return render_to_response("test.html")
@@ -63,7 +86,7 @@ def index(request):
 		except:
 			pass
 		# return redirect('poll/polls')
-		return render_to_response("results.html", {
+		return render_to_response("questions.html", {
 			'current_question':current_question,
 			'previous_question': previous_question,
 			}, context_instance=RequestContext(request))

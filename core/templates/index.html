@@ -3,14 +3,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>QNA</title>
 {%load staticfiles%}
-<link href="{% static 'main.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'app.css' %}" rel="stylesheet" type="text/css" />
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
 </head>
 
 <body>
 {% load url from future %}
 
-<p><a rel="nofollow" href="{% url "socialauth_begin" "facebook" %}">{{ "facebook"|title }}</a></p>
+<p><a rel="nofollow" href="{% url "socialauth_begin" "facebook" %}">{{ "facebook"|title }}</a>{% csrf_token %}</p>
 <p><a href = "{% url 'core.views.questions' %}">Proceed anonymously</a></p>
 </div>
 <div id="landing-box-clear">

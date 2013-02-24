@@ -20,8 +20,12 @@ if bool(os.environ.get('LOCAL_DEV', False)):
             'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
         }
     }
+    FACEBOOK_APP_ID = '343120432448964'
+    FACEBOOK_API_SECRET = 'f43073165e02ef728f31a315cd9fa6de'
 else:
     DATABASES = {'default': dj_database_url.config()}
+    FACEBOOK_API_SECRET = "924a5a01f43de7d991cd1c17edf4469b"
+    FACEBOOK_APP_ID = "406831919365032"
 
 
 TIME_ZONE = 'America/Chicago'
@@ -93,6 +97,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'social_auth.context_processors.social_auth_login_redirect',
+    'social_auth.context_processors.social_auth_backends',
+
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -147,8 +153,6 @@ LOGIN_URL          = '/login-form/'
 LOGIN_REDIRECT_URL = '/logged-in/'
 LOGIN_ERROR_URL    = '/login-error/'
 
-FACEBOOK_APP_ID = '343120432448964'
-FACEBOOK_API_SECRET= '0809eaae9cae32bf4f3574f47c0fca5e'
 #---------------------------------------------------------
 SERIALIZATION_MODULES = {
     'json': 'wadofstuff.django.serializers.json'

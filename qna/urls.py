@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
-
+import social_auth
 
 from ajax_select import urls as ajax_select_urls
 from django.contrib import admin
@@ -9,14 +9,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^$', 'core.views.index', name='index'),
-    # url(r'^qna/', include('qna.foo.urls')),
 	url(r'', include('social_auth.urls')),
 	url(r'^questions/$', 'core.views.questions', name='questions'),
     url(r'^search/$', 'core.views.search', name='search'),
     url(r'^search_results/(?P<searchtext>\w+)/$', 'core.views.search_results', name='search_results'),
-
-    # url(r'^search_results/$', 'core.views.search_results', name='search_results'),
-    #url(r'^search/(?P<searchtext>)/$', 'core.views.search', name='search'),
 	url(r'^vote/(?P<answer_id>\d+)/$', 'core.views.vote', name='vote'),
     url(r'^previous_question/(?P<previous_question_pk>\d+)/$', 'core.views.previous_question', name='previous_question'),
     url(r'^current_question/(?P<current_question_pk>\d+)/$', 'core.views.current_question', name='current_question'),
