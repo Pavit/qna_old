@@ -153,6 +153,14 @@ def logout(request):
 def search_form(request):
 	return render_to_response("search_form.html")
 
+def search_results(request, searchtext):
+	print "Search results"
+	response_dict = {
+		'results':Question.objects.filter(Q(question__icontains=searchtext)).order_by('question'),
+	}
+
+	return render_to_response("search_results.html", response_dict)
+
 
 def search(request):
 	data = {}
