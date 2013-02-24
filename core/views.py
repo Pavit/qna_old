@@ -1,25 +1,3 @@
-import httplib, ssl, urllib2, socket
-class HTTPSConnectionV3(httplib.HTTPSConnection):
-    def __init__(self, *args, **kwargs):
-        httplib.HTTPSConnection.__init__(self, *args, **kwargs)
-
-    def connect(self):
-        sock = socket.create_connection((self.host, self.port), self.timeout)
-        if self._tunnel_host:
-            self.sock = sock
-            self._tunnel()
-        try:
-            self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file, ssl_version=ssl.PROTOCOL_SSLv3)
-        except ssl.SSLError, e:
-            print("Trying SSLv3.")
-            self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file, ssl_version=ssl.PROTOCOL_SSLv23)
-
-class HTTPSHandlerV3(urllib2.HTTPSHandler):
-    def https_open(self, req):
-        return self.do_open(HTTPSConnectionV3, req)
-
-urllib2.install_opener(urllib2.build_opener(HTTPSHandlerV3()))
-
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -41,11 +19,11 @@ from django import forms
 from django.core import serializers
 from django.contrib.auth.models import User, AnonymousUser
 from forms import *
-
+from django.shortcuts import get_object_or_404
 
 def test (request):
 	return render_to_response("test.html")
-	
+
 def previous_question(request, previous_question_pk):
 	previous_question = Question.objects.get(id = previous_question_pk)
 	resp = {
@@ -62,6 +40,7 @@ def previous_question(request, previous_question_pk):
 
 def current_question(request, current_question_pk):
 	current_question = Question.objects.get(id = current_question_pk)
+	next_question = Question.objects.filter(~Q(id = current_question.id)).order_by('?')[:1].get()
 	answer_dict = {}
 	for a in current_question.answer_set.all():
 		answer_dict[a.id] = a.answer
@@ -69,10 +48,16 @@ def current_question(request, current_question_pk):
 		'current_question_title':current_question.question,
 		'current_question_choices': answer_dict,
 		'current_question': current_question,
+		'next_question': next_question,
 	}
 	#data = simplejson.dumps(response_dict)
 	#return HttpResponse(data, mimetype = "application/json")
 	return render_to_response("current_question.html", response_dict)#, context_instance=RequestContext(request))
+
+def view_question(request, slug, id):
+	current_question = get_object_or_404(Question, pk = id)
+	return render_to_response("current_question.html", {'current_question':current_question})
+
 
 def index(request):
 	if request.user.is_authenticated():

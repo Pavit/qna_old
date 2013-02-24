@@ -1,6 +1,9 @@
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('.answer').bind('click', function() {
+$('document').ready(function() {
+  pageurl = '/'+'{{current_question.slug}}'+'/';
+  window.history.pushState({path:pageurl},'',pageurl);
+});
+    $('.answer').click(function() {
       $('#previous_question').fadeOut(300);
       $('#current_question').fadeOut(300);
         $.ajax({
@@ -13,9 +16,9 @@
             $("#previous_question").fadeIn(300);
           }
         });
-
+    return false;
     });
-  });
+
  </script>
 
 <div id="current_question" class="row">
@@ -36,7 +39,7 @@
       <div class="row">
         <div class="twelve columns">
           {% for a in current_question.answer_set.all %} {% csrf_token %}
-          <a href="#" id="{{a.id}}" type="int" class="answer"><p class="current_answers text-center">{{a.answer}}</p></a>
+          <a href = '' id="{{a.id}}" type="int" class="answer"><p class="current_answers text-center">{{a.answer}}</p></a>
           {%endfor%}
         </div>
       </div>

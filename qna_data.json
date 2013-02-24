@@ -6,7 +6,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Dogs or cats?"
+            "question": "Dogs or cats?",
+            "slug": "dogs-or-cats"
         }
     },
     {
@@ -16,7 +17,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Terran, Protoss, or Zerg?"
+            "question": "Terran, Protoss, or Zerg?",
+            "slug": "terran-protoss-or-zerg"
         }
     },
     {
@@ -26,7 +28,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Who did you vote for?"
+            "question": "Who did you vote for?",
+            "slug": "who-did-you-vote-for"
         }
     },
     {
@@ -36,7 +39,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Can you swim?"
+            "question": "Can you swim?",
+            "slug": "can-you-swim"
         }
     },
     {
@@ -46,7 +50,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Blondes or Brunettes?"
+            "question": "Blondes or Brunettes?",
+            "slug": "blondes-or-brunettes"
         }
     },
     {
@@ -56,7 +61,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "How do you feel about eating meat?"
+            "question": "How do you feel about eating meat?",
+            "slug": "how-do-you-feel-about-eating-meat"
         }
     },
     {
@@ -66,7 +72,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "What is the solution to 48÷2(9+3)?"
+            "question": "What is the solution to 48\u00f72(9+3)?",
+            "slug": "what-is-the-solution-to-48293"
         }
     },
     {
@@ -76,7 +83,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "What is your favorite wall material?"
+            "question": "What is your favorite wall material?",
+            "slug": "what-is-your-favorite-wall-material"
         }
     },
     {
@@ -86,7 +94,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Who would win in a fight?"
+            "question": "Who would win in a fight?",
+            "slug": "who-would-win-in-a-fight"
         }
     },
     {
@@ -96,7 +105,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Who has the most leadership?"
+            "question": "Who has the most leadership?",
+            "slug": "who-has-the-most-leadership"
         }
     },
     {
@@ -106,7 +116,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Do you enjoy having photos taken of you?"
+            "question": "Do you enjoy having photos taken of you?",
+            "slug": "do-you-enjoy-having-photos-taken-of-you"
         }
     },
     {
@@ -116,7 +127,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Would you ever consider going to a Black Friday sale?"
+            "question": "Would you ever consider going to a Black Friday sale?",
+            "slug": "would-you-ever-consider-going-to-a-black-friday-sale"
         }
     },
     {
@@ -126,7 +138,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Who is the greatest bald character of all time?"
+            "question": "Who is the greatest bald character of all time?",
+            "slug": "who-is-the-greatest-bald-character-of-all-time"
         }
     },
     {
@@ -136,7 +149,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "What would you do if you got a tattoo of your significant other and then broke up with him/her?"
+            "question": "What would you do if you got a tattoo of your significant other and then broke up with him/her?",
+            "slug": "what-would-you-do-if-you-got-a-tattoo-of-your-significant-other-and-then-broke-up-with-himher"
         }
     },
     {
@@ -146,7 +160,8 @@
             "date": "2012-11-12",
             "submitter": null,
             "answered_by": [],
-            "question": "Would you have the balls to punch a shark in the face?"
+            "question": "Would you have the balls to punch a shark in the face?",
+            "slug": "would-you-have-the-balls-to-punch-a-shark-in-the-face"
         }
     },
     {
@@ -410,7 +425,7 @@
             "question": 9
         }
     },
-   {
+    {
         "pk": 30,
         "model": "core.answer",
         "fields": {
@@ -419,7 +434,7 @@
             "question": 9
         }
     },
-   {
+    {
         "pk": 31,
         "model": "core.answer",
         "fields": {
@@ -428,7 +443,7 @@
             "question": 9
         }
     },
-   {
+    {
         "pk": 32,
         "model": "core.answer",
         "fields": {
@@ -437,7 +452,7 @@
             "question": 9
         }
     },
-   {
+    {
         "pk": 33,
         "model": "core.answer",
         "fields": {
@@ -446,7 +461,7 @@
             "question": 9
         }
     },
-   {
+    {
         "pk": 34,
         "model": "core.answer",
         "fields": {
@@ -455,7 +470,7 @@
             "question": 10
         }
     },
-   {
+    {
         "pk": 35,
         "model": "core.answer",
         "fields": {
@@ -464,7 +479,7 @@
             "question": 10
         }
     },
-   {
+    {
         "pk": 36,
         "model": "core.answer",
         "fields": {
@@ -473,7 +488,7 @@
             "question": 10
         }
     },
-   {
+    {
         "pk": 37,
         "model": "core.answer",
         "fields": {
@@ -482,7 +497,7 @@
             "question": 10
         }
     },
-   {
+    {
         "pk": 38,
         "model": "core.answer",
         "fields": {
@@ -491,16 +506,16 @@
             "question": 10
         }
     },
-   {
+    {
         "pk": 39,
         "model": "core.answer",
         "fields": {
-            "answer": "Only if I’ve had time to get ready.",
+            "answer": "Only if I\u2019ve had time to get ready.",
             "selected_by": [],
             "question": 11
         }
     },
-   {
+    {
         "pk": 40,
         "model": "core.answer",
         "fields": {
@@ -509,7 +524,7 @@
             "question": 11
         }
     },
-   {
+    {
         "pk": 41,
         "model": "core.answer",
         "fields": {
@@ -518,7 +533,7 @@
             "question": 11
         }
     },
-   {
+    {
         "pk": 42,
         "model": "core.answer",
         "fields": {
@@ -527,7 +542,7 @@
             "question": 11
         }
     },
-   {
+    {
         "pk": 43,
         "model": "core.answer",
         "fields": {
@@ -536,16 +551,16 @@
             "question": 12
         }
     },
-   {
+    {
         "pk": 44,
         "model": "core.answer",
         "fields": {
-            "answer": "Only if there’s something I really want.",
+            "answer": "Only if there\u2019s something I really want.",
             "selected_by": [],
             "question": 12
         }
     },
-   {
+    {
         "pk": 45,
         "model": "core.answer",
         "fields": {
@@ -554,7 +569,7 @@
             "question": 12
         }
     },
-   {
+    {
         "pk": 46,
         "model": "core.answer",
         "fields": {
@@ -563,7 +578,7 @@
             "question": 12
         }
     },
-   {
+    {
         "pk": 47,
         "model": "core.answer",
         "fields": {
@@ -572,7 +587,7 @@
             "question": 13
         }
     },
-   {
+    {
         "pk": 48,
         "model": "core.answer",
         "fields": {
@@ -581,7 +596,7 @@
             "question": 13
         }
     },
-   {
+    {
         "pk": 49,
         "model": "core.answer",
         "fields": {
@@ -590,7 +605,7 @@
             "question": 13
         }
     },
-   {
+    {
         "pk": 50,
         "model": "core.answer",
         "fields": {
@@ -599,7 +614,7 @@
             "question": 13
         }
     },
-   {
+    {
         "pk": 51,
         "model": "core.answer",
         "fields": {
@@ -608,7 +623,7 @@
             "question": 13
         }
     },
-   {
+    {
         "pk": 52,
         "model": "core.answer",
         "fields": {
@@ -617,7 +632,7 @@
             "question": 14
         }
     },
-   {
+    {
         "pk": 53,
         "model": "core.answer",
         "fields": {
@@ -626,7 +641,7 @@
             "question": 14
         }
     },
-   {
+    {
         "pk": 54,
         "model": "core.answer",
         "fields": {
@@ -635,7 +650,7 @@
             "question": 14
         }
     },
-   {
+    {
         "pk": 55,
         "model": "core.answer",
         "fields": {
@@ -644,7 +659,7 @@
             "question": 14
         }
     },
-   {
+    {
         "pk": 56,
         "model": "core.answer",
         "fields": {
@@ -653,7 +668,7 @@
             "question": 15
         }
     },
-   {
+    {
         "pk": 57,
         "model": "core.answer",
         "fields": {
@@ -662,7 +677,7 @@
             "question": 15
         }
     },
-   {
+    {
         "pk": 58,
         "model": "core.answer",
         "fields": {
@@ -671,11 +686,11 @@
             "question": 15
         }
     },
-   {
+    {
         "pk": 59,
         "model": "core.answer",
         "fields": {
-            "answer": "No, I’d just start crying or something.",
+            "answer": "No, I\u2019d just start crying or something.",
             "selected_by": [],
             "question": 15
         }

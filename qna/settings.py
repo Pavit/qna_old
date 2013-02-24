@@ -9,6 +9,7 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+
 if bool(os.environ.get('LOCAL_DEV', False)):
     DATABASES = {
         'default': {
@@ -26,6 +27,7 @@ else:
     DATABASES = {'default': dj_database_url.config()}
     FACEBOOK_API_SECRET = "924a5a01f43de7d991cd1c17edf4469b"
     FACEBOOK_APP_ID = "406831919365032"
+
 
 
 TIME_ZONE = 'America/Chicago'
