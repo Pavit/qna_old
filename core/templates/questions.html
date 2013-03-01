@@ -31,9 +31,9 @@
     </ul>
     <section>
       <ul class="right">
-        <li><a href="#">SUBMIT</a></li>
-        <li><a href="#">PROFILE</a></li>
-        <li><a href="#">LOGIN</a></li>
+        <li><a href="/submitquestion/">SUBMIT</a></li>
+        <li><a href="/profile/">PROFILE</a></li>
+        <li><a href="#">{% if user.is_authenticated %} LOGGED IN AS {{user.first_name}} {{user.last_name}}. {%else%} LOGIN {%endif%}</a></li>
         <li class="search">
           <form>
             <input id="search" type="search" class="search-query" placeholder="Search..." />
@@ -45,9 +45,9 @@
   </div>
 </div>
 
-<div id="submitquestion"><br><br><br><br></div>
+<div id="submitquestion"></div>
 
-<div id="search_results"><br><br><br><br></div>
+<div id="search_results"></div>
 
 <div id="current_question"></div>
 

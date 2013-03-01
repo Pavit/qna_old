@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from accounts.models import UserProfile
 from django.db.models.manager import Manager
 from django.core.exceptions import ValidationError
+from django.template.defaultfilters import slugify
 #from tagging_autocomplete_tagit.models import TagAutocompleteTagItField
 
 class Question(models.Model):
@@ -13,19 +14,23 @@ class Question(models.Model):
 	answered_by = models.ManyToManyField(UserProfile, null=True, blank=True, default=None, related_name = 'answered')
 	slug = models.SlugField(max_length = 250, blank = True, null=True)
 	#tags = TagAutocompleteTagItField(max_tags=False)
-
+	
 	class Meta:
 		ordering = ['-date']
 		verbose_name = _('question')
 		verbose_name_plural = _('questions')
-
+		
 	def __unicode__(self):
 		return self.question
-
+		
 	def get_vote_count(self):
 		return Vote.objects.filter(question=self).count()
-
 	vote_count = property(fget=get_vote_count)
+		
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.slug = slugify(self.question)
+		super(Question, self).save(*args, **kwargs)
 
 
 class Answer(models.Model):

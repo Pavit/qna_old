@@ -55,9 +55,9 @@ $(document).ready(function() {
 
     if (formCount > 1) {
       // Delete the item/form
-      $(btn).parents('.item').remove();
+      $(btn).parents('.answer').remove();
 
-      var forms = $('.item'); // Get all the forms
+      var forms = $('.answer'); // Get all the forms
 
       // Update the total number of forms (1 less than before)
       $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
@@ -83,9 +83,9 @@ $(document).ready(function() {
     // You can only submit a maximum of 10 todo items
     if (formCount < 5) {
       // Clone a form (without event handlers) from the first form
-      var row = $(".item:first").clone(false).get(0);
+      var row = $(".answer:first").clone(false).get(0);
       // Insert it after the last form
-      $(row).removeAttr('id').hide().insertAfter(".item:last").slideDown(300);
+      $(row).removeAttr('id').hide().insertAfter(".answer:last").slideDown(300);
 
       // Remove the bits we don't want in the new row/form
       // e.g. error messages

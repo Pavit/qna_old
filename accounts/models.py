@@ -4,10 +4,16 @@ from facepy import GraphAPI
 import time, datetime
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
+from django_facebook.models import FacebookProfileModel
+from django_facebook.models import get_user_model
+from django.db.models.signals import post_save
+from social_auth.backends.facebook import FacebookBackend
+from social_auth.backends import google
+from social_auth.signals import socialauth_registered
 
-class UserProfileManager(models.Manager):
-	def create_user(self, username, email):
-		return self.model._default_manager.create(username=username)
+# class UserProfileManager(models.Manager):
+# 	def create_user(self, username, email):
+# 		return self.model._default_manager.create(username=username)
 
 
 class Education(models.Model):
@@ -22,9 +28,10 @@ class Concentration(models.Model):
 	education = models.ForeignKey(Education)
 	
 class UserProfile(models.Model):
+	user = models.OneToOneField(User)
 	username = models.CharField(max_length=128, unique=False, blank=True, null=True)
 	anonymous = models.BooleanField()
-	ip = models.IPAddressField(verbose_name=_('user\'s IP'))
+	ip = models.IPAddressField(verbose_name=('user\'s IP'), null=True, blank=True)
 	full_name = models.CharField(max_length=128, unique=True, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add = True)
 	last_login = models.DateTimeField(blank=True, null=True)
@@ -34,7 +41,7 @@ class UserProfile(models.Model):
 	last_name = models.CharField(max_length=200, blank=True, null=True)
 	name = models.CharField(max_length=200, blank=True, null=True)
 	locale = models.CharField(max_length=200, blank=True, null=True)
-	gender = models.CharField(max_length=200, blank=True, null=True)
+	#gender = models.CharField(max_length=200, blank=True, null=True)
 	hometown = models.CharField(max_length=200, blank=True, null=True)
 	location = models.CharField(max_length=200, blank=True, null=True)
 	work_position_id = models.CharField(max_length=200, blank=True, null=True)
@@ -52,9 +59,9 @@ class UserProfile(models.Model):
 	friends = models.ManyToManyField('self')
 	age = models.IntegerField(blank=True, null=True)
 	
-	objects = UserProfileManager()
-	def is_authenticated(self):
-		return True
+	# objects = UserProfileManager()
+	# def is_authenticated(self):
+	# 	return True
 
 	def populate_graph_info(self):
 		graphinfo = GraphAPI(self.fb_access_token).get('me/')
@@ -120,3 +127,26 @@ class UserProfile(models.Model):
 		
 	def get_fields(self):
 		return [(field.name, field.value_to_string(self)) for field in UserProfile._meta.fields]
+
+		
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)
+		
+		
+#from social_auth.backends.facebook import FacebookBackend
+#from social_auth.signals import socialauth_registered
+
+#def new_users_handler(sender, user, response, details, **kwargs):
+#    user.is_new = True
+#    if user.is_new:
+#		user.userprofile.populate_graph_info()
+#		user.save()
+ #   return True
+ 
+#socialauth_registered.connect(new_users_handler, sender=None)

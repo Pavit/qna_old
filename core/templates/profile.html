@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <title>QNA</title>
+
+  <!-- Include Font Files -->
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+  <!-- Include CSS Files -->
+  {% load staticfiles %}
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="{% static 'stylesheets/foundation.min.css' %}">
+  <link rel="stylesheet" href="{% static 'stylesheets/app.css' %}">
+</head>
+
+<body>
+
+<div class="row">
+  <div class="twelve columns">
+  <nav class="top-bar">
+    <ul>
+      <li class="name"><h1><a href="{%url index%}">QNA</a></h1></li>
+      <li class="toggle-topbar"><a href="#"></a></li>
+    </ul>
+    <section>
+      <ul class="right">
+        <li><a href="/submitquestion/">SUBMIT</a></li>
+        <li><a href="/profile/">PROFILE</a></li>
+        <li><a href="#">{% if user.is_authenticated %} LOGGED IN AS {{user.first_name}} {{user.last_name}}. {%else%} LOGIN {%endif%}</a></li>
+        <li class="search">
+          <form>
+            <input id="search" type="search" class="search-query" placeholder="Search..." />
+          </form>
+        </li>
+      </ul>
+    </section>
+  </nav>
+  </div>
+</div>
+
+<!--PROFILE BEGINS HERE-->
+
+<div id="current_question" class="row">
+  <div class="twelve columns">
+    <div class="panel red">
+      <div class="row">
+        <div class="twelve columns">
+          <h1>{{user.first_name}} {{user.last_name}}</h1>
+        </div>
+      </div>
+      <!-- Stats -->
+        <div class="row">
+          <h3 class="four columns">STATS</h3>
+          <div class="eight columns h3_offset">
+          <p>Member Since: {{user.userprofile.created_at}}</p>
+          <p>Age: {{user.userprofile.age}}</p>
+          <p>Gender: {{user.userprofile.gender}}</p>
+          <p># of Friends: {{user.userprofile.friends.count}}</p>
+          <p>Favorite Subject: {{user.userprofile.toptag}}</p>
+          </div>    
+        </div>
+      <!-- End Stats -->
+      <!-- Questions Submitted -->
+        <div class="row">
+          <div class="four columns">
+            <h3>SUBMITTED</h3>
+          </div>
+          <div class="eight columns h3_offset">
+            <p>{{totalvotes}} people have answered your questions at a rate of {{user.submittedresponserate}} per day.</p>
+            <p>{{user.userprofile.submittedresponsesrank}} users have asked more questions than you.</p>
+            <p class="expanderHead">Questions Submitted ({{user.userprofile.submissions.count}}) <span class="right expanderSign">+</span></p>
+            <div class="expanderContent">
+            <!-- Begin Insert of User-Submitted Questions -->
+            {%for question in user.userprofile.submissions.all %}
+            Question:{{question.question}}<br/>
+            <div id = "visualization"></div>
+            <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+            <script type="text/javascript">
+  $(document).ready(function() {
+    google.load("visualization", "1", { packages: ["corechart"] });
+    var chartdata;
+    chartdata = [
+    ['Answer', 'Votes'],
+    {%for answer in question.answer_set.all %}
+    ['{{answer.answer}}', {{answer.get_vote_count}}],
+    {% endfor %}
+    ];
+    var datatable = google.visualization.arrayToDataTable(chartdata);
+    chart = new google.visualization.PieChart(document.getElementById('visualization'));
+    options = {
+      'backgroundColor': "transparent",
+      'colors': ['#f15c22', '#eb4f68', '#eb62ca', '#9567eb', '#73a1d5'],
+      'sliceVisibilityThreshold':0,
+      'chartArea': {'width':"100%",'height':"80%"},
+      'legend': {'position': 'bottom'}
+    };
+    chart.draw(datatable, options);
+  });
+ </script>
+ {%endfor%}
+            <!-- End Insert of User-Submitted Questions -->
+            </div>
+          </div>    
+        </div>
+      <!-- End Questions Submitted -->
+      <!-- Questions Answered -->
+        <div class="row">
+          <div class="four columns">
+            <h3>ANSWERED</h3>
+          </div>
+          <div class="eight columns h3_offset">
+            <p>You have answered {{user.userprofile.selection.count}} questions at a rate of {{user.answeredresponserate}} per day.</p>
+            <p>{{user.answeredresponsesrank}} users have answered more questions than you.</p>
+            <p class="expanderHead2">Questions Answered ({{user.userprofile.selection.count}}) <span class="right expanderSign">+</span></p>
+            <div class="expanderContent2">
+            <!-- Begin Insert of User-Submitted Answers -->
+			{% for answer in user.userprofile.selection.all %}
+			Answer: {{answer}}<br>
+			Question: {{answer.question}}<br>
+			{%endfor%}
+            <!-- End Insert of User-Submitted Answers -->
+            </div>
+          </div>    
+        </div>
+      <!-- End Questions Answered -->
+    </div>
+  </div>
+</div>
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="{% static 'javascripts/jquery.js' %}"></script>
+  <script src="{% static 'javascripts/foundation.min.js'%}"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="{% static 'javascripts/app.js'%}"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".expanderHead").click(function(){
+        $(".expanderContent").slideToggle();
+        if ($(".expanderSign").text() == "+"){
+          $(".expanderSign").html("−")
+        }
+        else {
+          $(".expanderSign").text("+")
+        }
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".expanderHead2").click(function(){
+        $(".expanderContent2").slideToggle();
+        if ($(".expanderSign").text() == "+"){
+          $(".expanderSign").html("−")
+        }
+        else {
+          $(".expanderSign").text("+")
+        }
+      });
+    });
+  </script>
+
+
+</body>
+</html>

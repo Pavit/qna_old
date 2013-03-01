@@ -7,7 +7,8 @@ import os
 ADMINS = (
     ('Pavit Masson', 'pavitm@gmail.com'),
 )
-
+FACEBOOK_APP_ID = '343120432448964'
+FACEBOOK_APP_SECRET = 'f43073165e02ef728f31a315cd9fa6de'
 MANAGERS = ADMINS
 
 if bool(os.environ.get('LOCAL_DEV', False)):
@@ -22,10 +23,10 @@ if bool(os.environ.get('LOCAL_DEV', False)):
         }
     }
     FACEBOOK_APP_ID = '343120432448964'
-    FACEBOOK_API_SECRET = 'f43073165e02ef728f31a315cd9fa6de'
+    FACEBOOK_API_SECRET  = 'f43073165e02ef728f31a315cd9fa6de'
 else:
     DATABASES = {'default': dj_database_url.config()}
-    FACEBOOK_API_SECRET = "924a5a01f43de7d991cd1c17edf4469b"
+    FACEBOOK_API_SECRET  = "924a5a01f43de7d991cd1c17edf4469b"
     FACEBOOK_APP_ID = "406831919365032"
 
 
@@ -53,7 +54,7 @@ MEDIA_ROOT = ''
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = 'media'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -67,6 +68,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -90,23 +92,8 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.tz',
-    'django.contrib.messages.context_processors.messages',
-    'social_auth.context_processors.social_auth_login_redirect',
-    'social_auth.context_processors.social_auth_backends',
 
-)
 
-AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.facebook.FacebookBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 
 MIDDLEWARE_CLASSES = (
@@ -148,13 +135,44 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'social_auth.context_processors.social_auth_login_redirect',
+    'social_auth.context_processors.social_auth_backends',
 
-#---------django-social-auth settings--------------------
-SOCIAL_AUTH_USER_MODEL = 'accounts.UserProfile'
+)
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+AUTH_PROFILE_MODULE= 'accounts.UserProfile'
+#---------social_auth settings--------------------
+# SOCIAL_AUTH_USER_MODEL = 'accounts.UserProfile'
 LOGIN_URL          = '/login-form/'
-LOGIN_REDIRECT_URL = '/logged-in/'
+LOGIN_REDIRECT_URL = '/questions/'
 LOGIN_ERROR_URL    = '/login-error/'
 
+FACEBOOK_EXTENDED_PERMISSIONS = [
+	'email','friends_likes','user_about_me',
+	'user_birthday', 'friends_birthday', 'friends_about_me',
+	'user_location', 'friends_location','user_relationships','friends_relationships',
+	'friends_education_history','user_education_history','user_interests',
+	'friends_interests','user_relationship_details','friends_relationship_details','user_religion_politics',
+	'friends_religion_politics',
+]
+
+
+# AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+# FACEBOOK_STORE_LIKES = True
+# FACEBOOK_STORE_FRIENDS = True
+# FACEBOOK_LOGIN_DEFAULT_REDIRECT = '/questions/'
 #---------------------------------------------------------
 SERIALIZATION_MODULES = {
     'json': 'wadofstuff.django.serializers.json'

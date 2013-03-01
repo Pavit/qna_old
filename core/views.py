@@ -5,11 +5,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
 from django.contrib.messages.api import get_messages
 from datetime import date, datetime
-from social_auth import __version__ as version
-from social_auth.utils import setting
 from models import Question, Answer, Vote
 from pprint import pprint
-from social_auth.models import UserSocialAuth
 from accounts.models import UserProfile
 from facepy import GraphAPI
 from django.db.models import Q
@@ -20,7 +17,8 @@ from django.core import serializers
 from django.contrib.auth.models import User, AnonymousUser
 from forms import *
 from django.shortcuts import get_object_or_404
-
+from random import randrange
+from django.views.decorators.csrf import csrf_exempt
 def test (request):
 	return render_to_response("test.html")
 
@@ -56,25 +54,31 @@ def current_question(request, current_question_pk):
 
 def view_question(request, slug, id):
 	current_question = get_object_or_404(Question, pk = id)
-	return render_to_response("current_question.html", {'current_question':current_question})
+	return render_to_response("questions.html", {'current_question':current_question})
 
-
+@csrf_exempt
 def index(request):
 	if request.user.is_authenticated():
-		user = request.user
-		try:
-			current_question = Question.objects.filter(~Q(answered_by = user))[:1].get()
-		except:
-			return redirect('profile')
-		try:
-			previous_question = request.GET.get('current_question')[0]
-		except:
-			pass
-		# return redirect('poll/polls')
-		return render_to_response("questions.html", {
-			'current_question':current_question,
-			'previous_question': previous_question,
-			}, context_instance=RequestContext(request))
+		user = request.user.userprofile
+		user.fb_access_token = request.user.social_auth.get(provider='facebook').extra_data["access_token"]
+		user.populate_graph_info()
+		user.save()
+		return redirect(questions)
+		#return render_to_response("questions.html", {},)
+	# 	user = request.user
+	# 	try:
+	# 		current_question = Question.objects.filter(~Q(answered_by = user))[:1].get()
+	# 	except:
+	# 		return redirect('profile')
+	# 	try:
+	# 		previous_question = request.GET.get('current_question')[0]
+	# 	except:
+	# 		previous_question = None
+	# 	# return redirect('poll/polls')
+	# 	return render_to_response("questions.html", {
+	# 		'current_question':current_question,
+	# 		'previous_question': previous_question,
+	# 		}, context_instance=RequestContext(request))
 	else:
 		return render_to_response("index.html")
 
@@ -87,10 +91,16 @@ def vote(request, answer_id):
 			ip=request.META['REMOTE_ADDR'],
 			answer = a,
 			)
+
+		print dir(request.user)
+		print request.user.is_authenticated()
+		user = request.user
+		print user.userprofile
 		if request.user.is_authenticated():
-			grabuser = UserProfile.objects.get(username = request.user.username)
+			grabuser = request.user.userprofile
+			print grabuser
 		else:
-			grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'])
+			grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'], user_id = randrange(10))
 		vote.users.add(grabuser)
 		voted_answer = vote.answer
 		voted_answer.selected_by.add(grabuser)
@@ -99,6 +109,8 @@ def vote(request, answer_id):
 		voted_question.save()
 		voted_answer.save()
 		vote.save()
+		grabuser.save()
+		print grabuser.selection.all()
 		current_question = Question.objects.filter(~Q(id = previous_question.id)).order_by('?')[:1].get()
 		answer_list =[]
 		answer_list.append(["Answer", "Votes"])
@@ -117,9 +129,9 @@ def vote(request, answer_id):
 
 def questions(request):
 	if request.user.is_authenticated():
-		grabuser = UserProfile.objects.get(username = request.user.username)
+		grabuser = request.user
 	else:
-		grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'])
+		grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'],user_id = randrange(10))
 	#current_question = Question.objects.filter(~Q(answered_by = grabuser))[:1].get() #----enable this line to prevent repeating questions
 	current_question = Question.objects.all().order_by('?')[:1].get()
 
@@ -138,25 +150,26 @@ def questions(request):
 
 @login_required
 def profile(request):
-	user = UserProfile.objects.get(username = request.user.username)
-	user.populate_graph_info()
+	user = request.user.userprofile
+	#user.populate_graph_info()
 	user.save()
 	print user.birthday
 	uservotes = user.vote_set.all()
 	print uservotes
-	pollcount = Poll.objects.all().count()
+	pollcount = Question.objects.all().count()
 	print "questions you submit:"
 	print user.submissions.all()
 	print "questions you answered:"
 	print user.answered.all()
-	for p in Poll.objects.all():
-		print p.tags
-	return render_to_response("profile.html", {'user': user, 'pollcount':pollcount,'APP_ID': settings.FACEBOOK_APP_ID}, context_instance = RequestContext(request))
+	totalvotes = 0
+	for q in user.submissions.all():
+		totalvotes += q.get_vote_count()
+	return render_to_response("profile.html", {'pollcount':pollcount,'APP_ID': settings.FACEBOOK_APP_ID, 'totalvotes':totalvotes,}, context_instance = RequestContext(request))
 
 def logout(request):
 	"""Logs out user"""
 	auth_logout(request)
-	return redirect('landing')
+	return redirect('index')
 
 def search_form(request):
 	return render_to_response("search_form.html")
@@ -190,3 +203,44 @@ def search(request):
     # form = QuestionForm(initial=initial)
     # dd['form'] = form
     # return render_to_response('search_form.html',dd,context_instance=RequestContext(request))
+
+from core.forms import *
+from django.core.context_processors import csrf
+from django.template import RequestContext # For CSRF
+from django.forms.formsets import formset_factory, BaseFormSet
+
+def submitquestion(request):
+	class RequiredFormSet(BaseFormSet):
+		def __init__(self, *args, **kwargs):
+			super(RequiredFormSet, self).__init__(*args, **kwargs)
+			for form in self.forms:
+				form.empty_permitted = False
+				
+	AnswerFormSet = formset_factory(AnswerForm, max_num=5, formset = RequiredFormSet)
+	user = request.user.userprofile
+	if request.method == 'POST': # If the form has been submitted...
+		print "this poll should be assigned to: %s" %user
+		question_form = QuestionForm(request.POST) # A form bound to the POST data
+		# Create a formset from the submitted data
+		answer_formset = AnswerFormSet(request.POST, request.FILES)
+		if question_form.is_valid() and answer_formset.is_valid():
+			print "made it past valid check"
+			question = question_form.save(commit=False)
+			question.submitter = user
+			question.save()
+			print answer_formset
+			#print poll.customuser.username
+			for form in answer_formset.forms:
+				answer = form.save(commit=False)
+				answer.question = question
+				answer.save()
+				print answer
+			return redirect('profile')
+	else:
+		question_form = QuestionForm()
+		answer_formset = AnswerFormSet()
+	c = {'question_form': question_form,
+	'answer_formset': answer_formset,
+	}
+	c.update(csrf(request))
+	return render_to_response('submitquestion.html', c, context_instance = RequestContext(request))
