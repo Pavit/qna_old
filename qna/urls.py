@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
-import django_facebook
+
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
@@ -12,8 +12,6 @@ urlpatterns = patterns('',
     url(r'^(?P<slug>[-\w\d]+),(?P<id>\d+)/$', 'core.views.view_question', name='view_question'),
     # url(r'^qna/', include('qna.foo.urls')),
 	url(r'', include('social_auth.urls')),
-    (r'^facebook/', include('django_facebook.urls')),
-    (r'^accounts/', include('django_facebook.auth_urls')),
 	url(r'^logout/$', 'core.views.logout', name='logout'),
 	url(r'^questions/$', 'core.views.questions', name='questions'),
 	url(r'^profile/$', 'core.views.profile', name='profile'),
