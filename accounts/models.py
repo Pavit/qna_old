@@ -4,8 +4,6 @@ from facepy import GraphAPI
 import time, datetime
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
-from django_facebook.models import FacebookProfileModel
-from django_facebook.models import get_user_model
 from django.db.models.signals import post_save
 from social_auth.backends.facebook import FacebookBackend
 from social_auth.backends import google
