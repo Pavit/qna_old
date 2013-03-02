@@ -1,13 +1,13 @@
 # Define a custom User class to work with django-social-auth
 from django.db import models
 from facepy import GraphAPI
-import time, datetime
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from django.db.models.signals import post_save
 from social_auth.backends.facebook import FacebookBackend
 from social_auth.backends import google
 from social_auth.signals import socialauth_registered
+from datetime import date, datetime
 
 # class UserProfileManager(models.Manager):
 # 	def create_user(self, username, email):
@@ -26,7 +26,7 @@ class Concentration(models.Model):
 	education = models.ForeignKey(Education)
 	
 class UserProfile(models.Model):
-	user = models.OneToOneField(User)
+	user = models.OneToOneField(User, blank= True, null=True)
 	username = models.CharField(max_length=128, unique=False, blank=True, null=True)
 	anonymous = models.BooleanField()
 	ip = models.IPAddressField(verbose_name=('user\'s IP'), null=True, blank=True)
@@ -39,7 +39,7 @@ class UserProfile(models.Model):
 	last_name = models.CharField(max_length=200, blank=True, null=True)
 	name = models.CharField(max_length=200, blank=True, null=True)
 	locale = models.CharField(max_length=200, blank=True, null=True)
-	#gender = models.CharField(max_length=200, blank=True, null=True)
+	gender = models.CharField(max_length=200, blank=True, null=True)
 	hometown = models.CharField(max_length=200, blank=True, null=True)
 	location = models.CharField(max_length=200, blank=True, null=True)
 	work_position_id = models.CharField(max_length=200, blank=True, null=True)
@@ -63,13 +63,14 @@ class UserProfile(models.Model):
 
 	def populate_graph_info(self):
 		graphinfo = GraphAPI(self.fb_access_token).get('me/')
+		print graphinfo
 		if "name" in graphinfo: self.username = graphinfo["name"]
 		if "first_name" in graphinfo: self.first_name = graphinfo["first_name"]
 		if "last_name" in graphinfo: self.last_name = graphinfo["last_name"]
 		if "gender" in graphinfo: self.gender = graphinfo["gender"]
 		if "email" in graphinfo: self.email = graphinfo["email"]
 		if "birthday" in graphinfo:
-			self.birthday = datetime.datetime.strptime(graphinfo["birthday"], "%m/%d/%Y")
+			self.birthday = datetime.strptime(graphinfo["birthday"], "%m/%d/%Y")
 		if "timezone" in graphinfo: self.timezone = graphinfo["timezone"]
 		if "hometown" in graphinfo: self.hometown = graphinfo["hometown"]
 		if "location" in graphinfo: self.location = graphinfo["location"]
@@ -100,6 +101,16 @@ class UserProfile(models.Model):
 				newed.save()
 				self.educations.add(newed)
 		self.save()
+		print self.gender
+		print self.birthday
+		print self.birthday.day
+		print date.today().day
+		today = date.today()
+		y = today.year - self.birthday.year
+		if today.month < self.birthday.month or today.month == self.birthday.month and today.day < self.birthday.day:
+			y -= 1
+		self.age = y
+		print self.age
 		return self
 
 	def check_friends(self):

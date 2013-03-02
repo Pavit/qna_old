@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+    <object pk="14" model="contenttypes.contenttype">
+        <field type="CharField" name="name">answer</field>
+        <field type="CharField" name="app_label">core</field>
+        <field type="CharField" name="model">answer</field>
+    </object>
+    <object pk="12" model="contenttypes.contenttype">
+        <field type="CharField" name="name">association</field>
+        <field type="CharField" name="app_label">social_auth</field>
+        <field type="CharField" name="model">association</field>
+    </object>
+    <object pk="8" model="contenttypes.contenttype">
+        <field type="CharField" name="name">concentration</field>
+        <field type="CharField" name="app_label">accounts</field>
+        <field type="CharField" name="model">concentration</field>
+    </object>
+    <object pk="4" model="contenttypes.contenttype">
+        <field type="CharField" name="name">content type</field>
+        <field type="CharField" name="app_label">contenttypes</field>
+        <field type="CharField" name="model">contenttype</field>
+    </object>
+    <object pk="7" model="contenttypes.contenttype">
+        <field type="CharField" name="name">education</field>
+        <field type="CharField" name="app_label">accounts</field>
+        <field type="CharField" name="model">education</field>
+    </object>
+    <object pk="2" model="contenttypes.contenttype">
+        <field type="CharField" name="name">group</field>
+        <field type="CharField" name="app_label">auth</field>
+        <field type="CharField" name="model">group</field>
+    </object>
+    <object pk="16" model="contenttypes.contenttype">
+        <field type="CharField" name="name">log entry</field>
+        <field type="CharField" name="app_label">admin</field>
+        <field type="CharField" name="model">logentry</field>
+    </object>
+    <object pk="11" model="contenttypes.contenttype">
+        <field type="CharField" name="name">nonce</field>
+        <field type="CharField" name="app_label">social_auth</field>
+        <field type="CharField" name="model">nonce</field>
+    </object>
+    <object pk="1" model="contenttypes.contenttype">
+        <field type="CharField" name="name">permission</field>
+        <field type="CharField" name="app_label">auth</field>
+        <field type="CharField" name="model">permission</field>
+    </object>
+    <object pk="13" model="contenttypes.contenttype">
+        <field type="CharField" name="name">question</field>
+        <field type="CharField" name="app_label">core</field>
+        <field type="CharField" name="model">question</field>
+    </object>
+    <object pk="5" model="contenttypes.contenttype">
+        <field type="CharField" name="name">session</field>
+        <field type="CharField" name="app_label">sessions</field>
+        <field type="CharField" name="model">session</field>
+    </object>
+    <object pk="6" model="contenttypes.contenttype">
+        <field type="CharField" name="name">site</field>
+        <field type="CharField" name="app_label">sites</field>
+        <field type="CharField" name="model">site</field>
+    </object>
+    <object pk="3" model="contenttypes.contenttype">
+        <field type="CharField" name="name">user</field>
+        <field type="CharField" name="app_label">auth</field>
+        <field type="CharField" name="model">user</field>
+    </object>
+    <object pk="9" model="contenttypes.contenttype">
+        <field type="CharField" name="name">user profile</field>
+        <field type="CharField" name="app_label">accounts</field>
+        <field type="CharField" name="model">userprofile</field>
+    </object>
+    <object pk="10" model="contenttypes.contenttype">
+        <field type="CharField" name="name">user social auth</field>
+        <field type="CharField" name="app_label">social_auth</field>
+        <field type="CharField" name="model">usersocialauth</field>
+    </object>
+    <object pk="15" model="contenttypes.contenttype">
+        <field type="CharField" name="name">vote</field>
+        <field type="CharField" name="app_label">core</field>
+        <field type="CharField" name="model">vote</field>
+    </object>
+    <object pk="b6e2f8c717447cbdfffcbcfe160311dd" model="sessions.session">
+        <field type="TextField" name="session_data">YzI1NDdhYTEzODk3NDNjNTRjNDU5MzE1NWIxNzkyNzhkMmRhMTgxMTqAAn1xAShVDmZhY2Vib29r
+X3N0YXRlVSBtaUJadWN2cGxuVUdUNjlXMzNraGJ5OEhwbGZ4YWRmUFUPX3Nlc3Npb25fZXhwaXJ5
+cQJjZGF0ZXRpbWUKZGF0ZXRpbWUKcQNVCgfdBB4IIxEMsgBjZGphbmdvLnV0aWxzLnRpbWV6b25l
+ClVUQwpxBClScQWGUnEGVRJfYXV0aF91c2VyX2JhY2tlbmRxB1Utc29jaWFsX2F1dGguYmFja2Vu
+ZHMuZmFjZWJvb2suRmFjZWJvb2tCYWNrZW5kcQhVDV9hdXRoX3VzZXJfaWRxCUsCVR5zb2NpYWxf
+YXV0aF9sYXN0X2xvZ2luX2JhY2tlbmRxClUIZmFjZWJvb2txC3Uu
+</field>
+        <field type="DateTimeField" name="expire_date">2013-04-30T08:35:17.832000+00:00</field>
+    </object>
+    <object pk="1" model="sites.site">
+        <field type="CharField" name="domain">example.com</field>
+        <field type="CharField" name="name">example.com</field>
+    </object>
+    <object pk="1" model="accounts.education">
+        <field type="CharField" name="school_id">107945585905288</field>
+        <field type="CharField" name="school_name">South Brunswick High School</field>
+        <field type="CharField" name="school_type">High School</field>
+        <field type="CharField" name="year">2002</field>
+    </object>
+    <object pk="2" model="accounts.education">
+        <field type="CharField" name="school_id">228863897157991</field>
+        <field type="CharField" name="school_name">Rutgers University - College Avenue Campus</field>
+        <field type="CharField" name="school_type">College</field>
+        <field type="CharField" name="year">2006</field>
+    </object>
+    <object pk="3" model="accounts.education">
+        <field type="CharField" name="school_id">107945585905288</field>
+        <field type="CharField" name="school_name">South Brunswick High School</field>
+        <field type="CharField" name="school_type">High School</field>
+        <field type="CharField" name="year">2002</field>
+    </object>
+    <object pk="4" model="accounts.education">
+        <field type="CharField" name="school_id">228863897157991</field>
+        <field type="CharField" name="school_name">Rutgers University - College Avenue Campus</field>
+        <field type="CharField" name="school_type">College</field>
+        <field type="CharField" name="year">2006</field>
+    </object>
+    <object pk="1" model="accounts.concentration">
+        <field type="CharField" name="conc_id">103966102974293</field>
+        <field type="CharField" name="conc_name">Mathematics</field>
+        <field to="accounts.education" name="education" rel="ManyToOneRel">2</field>
+    </object>
+    <object pk="2" model="accounts.concentration">
+        <field type="CharField" name="conc_id">108180979203954</field>
+        <field type="CharField" name="conc_name">Economics</field>
+        <field to="accounts.education" name="education" rel="ManyToOneRel">2</field>
+    </object>
+    <object pk="3" model="accounts.concentration">
+        <field type="CharField" name="conc_id">103966102974293</field>
+        <field type="CharField" name="conc_name">Mathematics</field>
+        <field to="accounts.education" name="education" rel="ManyToOneRel">4</field>
+    </object>
+    <object pk="4" model="accounts.concentration">
+        <field type="CharField" name="conc_id">108180979203954</field>
+        <field type="CharField" name="conc_name">Economics</field>
+        <field to="accounts.education" name="education" rel="ManyToOneRel">4</field>
+    </object>
+    <object pk="16" model="core.question">
+        <field type="CharField" name="question">hi</field>
+        <field type="DateField" name="date">2013-03-01</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel">2</field>
+        <field type="SlugField" name="slug">hi</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="1" model="core.question">
+        <field type="CharField" name="question">Dogs or cats?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">dogs-or-cats</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="2" model="core.question">
+        <field type="CharField" name="question">Terran, Protoss, or Zerg?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">terran-protoss-or-zerg</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="3" model="core.question">
+        <field type="CharField" name="question">Who did you vote for?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">who-did-you-vote-for</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="4" model="core.question">
+        <field type="CharField" name="question">Can you swim?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">can-you-swim</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="5" model="core.question">
+        <field type="CharField" name="question">Blondes or Brunettes?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">blondes-or-brunettes</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="6" model="core.question">
+        <field type="CharField" name="question">How do you feel about eating meat?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">how-do-you-feel-about-eating-meat</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="7" model="core.question">
+        <field type="CharField" name="question">What is the solution to 48÷2(9+3)?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">what-is-the-solution-to-48293</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="8" model="core.question">
+        <field type="CharField" name="question">What is your favorite wall material?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">what-is-your-favorite-wall-material</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="9" model="core.question">
+        <field type="CharField" name="question">Who would win in a fight?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">who-would-win-in-a-fight</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="10" model="core.question">
+        <field type="CharField" name="question">Who has the most leadership?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">who-has-the-most-leadership</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="11" model="core.question">
+        <field type="CharField" name="question">Do you enjoy having photos taken of you?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">do-you-enjoy-having-photos-taken-of-you</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="12" model="core.question">
+        <field type="CharField" name="question">Would you ever consider going to a Black Friday sale?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">would-you-ever-consider-going-to-a-black-friday-sale</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="13" model="core.question">
+        <field type="CharField" name="question">Who is the greatest bald character of all time?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">who-is-the-greatest-bald-character-of-all-time</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="14" model="core.question">
+        <field type="CharField" name="question">What would you do if you got a tattoo of your significant other and then broke up with him/her?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">what-would-you-do-if-you-got-a-tattoo-of-your-significant-other-and-then-broke-up-with-himher</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="15" model="core.question">
+        <field type="CharField" name="question">Would you have the balls to punch a shark in the face?</field>
+        <field type="DateField" name="date">2012-11-12</field>
+        <field to="accounts.userprofile" name="submitter" rel="ManyToOneRel"><None></None></field>
+        <field type="SlugField" name="slug">would-you-have-the-balls-to-punch-a-shark-in-the-face</field>
+        <field to="accounts.userprofile" name="answered_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="1" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="answer">Dogs</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="2" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="answer">Cats</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="3" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="answer">Neither</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="4" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="answer">Turtles</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="5" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="answer">Terran</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="6" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="answer">Protoss</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="7" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="answer">Zerg</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="8" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="answer">What?</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="9" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">3</field>
+        <field type="CharField" name="answer">Voting's for jews.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="10" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">3</field>
+        <field type="CharField" name="answer">Obama</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="11" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">3</field>
+        <field type="CharField" name="answer">Romney</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="12" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">4</field>
+        <field type="CharField" name="answer">Yes</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="13" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">4</field>
+        <field type="CharField" name="answer">No</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="14" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">5</field>
+        <field type="CharField" name="answer">Blondes</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="15" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">5</field>
+        <field type="CharField" name="answer">Brunettes</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="16" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">5</field>
+        <field type="CharField" name="answer">I will take anything.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="17" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="answer">Meat is delicious.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="18" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="answer">Eating meat is unhealthy.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="19" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="answer">Eating meat is inhumane and uncivilized.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="20" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="answer">I can't enjoy a meal unless it once had hopes and dreams.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="21" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="answer">2</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="22" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="answer">288</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="23" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="answer">Leave me alone, I just wanted to study literature!</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="24" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="answer">Exposed brick.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="25" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="answer">Wood panel.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="26" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="answer">Concrete.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="27" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="answer">Tiles.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="28" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="answer">Plaster.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="29" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="answer">Superman</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="30" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="answer">The Hulk</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="31" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="answer">Thor</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="32" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="answer">Goku</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="33" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="answer">Batman</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="34" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="answer">Captain America</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="35" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="answer">Optimus Prime</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="36" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="answer">Leonardo</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="37" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="answer">Captain Kirk</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="38" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="answer">Duke</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="39" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="answer">Only if I’ve had time to get ready.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="40" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="answer">Never.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="41" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="answer">Always.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="42" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="answer">Only if the background has lasers.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="43" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="answer">I go every year.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="44" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="answer">Only if there’s something I really want.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="45" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="answer">Hell no, I value my life too much.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="46" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="answer">No, I just order everything online.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="47" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="answer">Professor X</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="48" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="answer">Charlie Brown</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="49" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="answer">Captain Picard</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="50" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="answer">Morpheus</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="51" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="answer">Captain Kirk</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="52" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="answer">Laser removal.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="53" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="answer">Keep it as is.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="54" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="answer">Modify it so that it insults them.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="55" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="answer">Cover it with something cool looking.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="56" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="answer">If I was drunk.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="57" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="answer">I punch sharks in the faces all the time.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="58" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="answer">Maybe if it was eating my leg.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="59" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="answer">No, I’d just start crying or something.</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="60" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">16</field>
+        <field type="CharField" name="answer">Yes</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="61" model="core.answer">
+        <field to="core.question" name="question" rel="ManyToOneRel">16</field>
+        <field type="CharField" name="answer">no</field>
+        <field to="accounts.userprofile" name="selected_by" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="1" model="core.vote">
+        <field to="core.question" name="question" rel="ManyToOneRel">9</field>
+        <field to="core.answer" name="answer" rel="ManyToOneRel">30</field>
+        <field type="IPAddressField" name="ip">127.0.0.1</field>
+        <field type="DateTimeField" name="datetime">2013-03-02T01:52:41.705000+00:00</field>
+        <field to="accounts.userprofile" name="users" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="2" model="core.vote">
+        <field to="core.question" name="question" rel="ManyToOneRel">4</field>
+        <field to="core.answer" name="answer" rel="ManyToOneRel">13</field>
+        <field type="IPAddressField" name="ip">127.0.0.1</field>
+        <field type="DateTimeField" name="datetime">2013-03-02T01:52:43.961000+00:00</field>
+        <field to="accounts.userprofile" name="users" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="3" model="core.vote">
+        <field to="core.question" name="question" rel="ManyToOneRel">14</field>
+        <field to="core.answer" name="answer" rel="ManyToOneRel">53</field>
+        <field type="IPAddressField" name="ip">127.0.0.1</field>
+        <field type="DateTimeField" name="datetime">2013-03-02T01:52:46.890000+00:00</field>
+        <field to="accounts.userprofile" name="users" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="4" model="core.vote">
+        <field to="core.question" name="question" rel="ManyToOneRel">13</field>
+        <field to="core.answer" name="answer" rel="ManyToOneRel">49</field>
+        <field type="IPAddressField" name="ip">127.0.0.1</field>
+        <field type="DateTimeField" name="datetime">2013-03-02T01:52:49.985000+00:00</field>
+        <field to="accounts.userprofile" name="users" rel="ManyToManyRel"><object pk="2"></object></field>
+    </object>
+    <object pk="19" model="auth.permission">
+        <field type="CharField" name="name">Can add concentration</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="codename">add_concentration</field>
+    </object>
+    <object pk="22" model="auth.permission">
+        <field type="CharField" name="name">Can change concentration</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="codename">change_concentration</field>
+    </object>
+    <object pk="25" model="auth.permission">
+        <field type="CharField" name="name">Can delete concentration</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="codename">delete_concentration</field>
+    </object>
+    <object pk="20" model="auth.permission">
+        <field type="CharField" name="name">Can add education</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="codename">add_education</field>
+    </object>
+    <object pk="23" model="auth.permission">
+        <field type="CharField" name="name">Can change education</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="codename">change_education</field>
+    </object>
+    <object pk="26" model="auth.permission">
+        <field type="CharField" name="name">Can delete education</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="codename">delete_education</field>
+    </object>
+    <object pk="21" model="auth.permission">
+        <field type="CharField" name="name">Can add user profile</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="codename">add_userprofile</field>
+    </object>
+    <object pk="24" model="auth.permission">
+        <field type="CharField" name="name">Can change user profile</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="codename">change_userprofile</field>
+    </object>
+    <object pk="27" model="auth.permission">
+        <field type="CharField" name="name">Can delete user profile</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="codename">delete_userprofile</field>
+    </object>
+    <object pk="46" model="auth.permission">
+        <field type="CharField" name="name">Can add log entry</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">16</field>
+        <field type="CharField" name="codename">add_logentry</field>
+    </object>
+    <object pk="47" model="auth.permission">
+        <field type="CharField" name="name">Can change log entry</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">16</field>
+        <field type="CharField" name="codename">change_logentry</field>
+    </object>
+    <object pk="48" model="auth.permission">
+        <field type="CharField" name="name">Can delete log entry</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">16</field>
+        <field type="CharField" name="codename">delete_logentry</field>
+    </object>
+    <object pk="1" model="auth.permission">
+        <field type="CharField" name="name">Can add group</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="codename">add_group</field>
+    </object>
+    <object pk="4" model="auth.permission">
+        <field type="CharField" name="name">Can change group</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="codename">change_group</field>
+    </object>
+    <object pk="7" model="auth.permission">
+        <field type="CharField" name="name">Can delete group</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="codename">delete_group</field>
+    </object>
+    <object pk="2" model="auth.permission">
+        <field type="CharField" name="name">Can add permission</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="codename">add_permission</field>
+    </object>
+    <object pk="5" model="auth.permission">
+        <field type="CharField" name="name">Can change permission</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="codename">change_permission</field>
+    </object>
+    <object pk="8" model="auth.permission">
+        <field type="CharField" name="name">Can delete permission</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="codename">delete_permission</field>
+    </object>
+    <object pk="3" model="auth.permission">
+        <field type="CharField" name="name">Can add user</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="CharField" name="codename">add_user</field>
+    </object>
+    <object pk="6" model="auth.permission">
+        <field type="CharField" name="name">Can change user</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="CharField" name="codename">change_user</field>
+    </object>
+    <object pk="9" model="auth.permission">
+        <field type="CharField" name="name">Can delete user</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="CharField" name="codename">delete_user</field>
+    </object>
+    <object pk="10" model="auth.permission">
+        <field type="CharField" name="name">Can add content type</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">4</field>
+        <field type="CharField" name="codename">add_contenttype</field>
+    </object>
+    <object pk="11" model="auth.permission">
+        <field type="CharField" name="name">Can change content type</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">4</field>
+        <field type="CharField" name="codename">change_contenttype</field>
+    </object>
+    <object pk="12" model="auth.permission">
+        <field type="CharField" name="name">Can delete content type</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">4</field>
+        <field type="CharField" name="codename">delete_contenttype</field>
+    </object>
+    <object pk="37" model="auth.permission">
+        <field type="CharField" name="name">Can add answer</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="codename">add_answer</field>
+    </object>
+    <object pk="40" model="auth.permission">
+        <field type="CharField" name="name">Can change answer</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="codename">change_answer</field>
+    </object>
+    <object pk="43" model="auth.permission">
+        <field type="CharField" name="name">Can delete answer</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="codename">delete_answer</field>
+    </object>
+    <object pk="38" model="auth.permission">
+        <field type="CharField" name="name">Can add question</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="codename">add_question</field>
+    </object>
+    <object pk="41" model="auth.permission">
+        <field type="CharField" name="name">Can change question</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="codename">change_question</field>
+    </object>
+    <object pk="44" model="auth.permission">
+        <field type="CharField" name="name">Can delete question</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="codename">delete_question</field>
+    </object>
+    <object pk="39" model="auth.permission">
+        <field type="CharField" name="name">Can add vote</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="codename">add_vote</field>
+    </object>
+    <object pk="42" model="auth.permission">
+        <field type="CharField" name="name">Can change vote</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="codename">change_vote</field>
+    </object>
+    <object pk="45" model="auth.permission">
+        <field type="CharField" name="name">Can delete vote</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="codename">delete_vote</field>
+    </object>
+    <object pk="13" model="auth.permission">
+        <field type="CharField" name="name">Can add session</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">5</field>
+        <field type="CharField" name="codename">add_session</field>
+    </object>
+    <object pk="14" model="auth.permission">
+        <field type="CharField" name="name">Can change session</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">5</field>
+        <field type="CharField" name="codename">change_session</field>
+    </object>
+    <object pk="15" model="auth.permission">
+        <field type="CharField" name="name">Can delete session</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">5</field>
+        <field type="CharField" name="codename">delete_session</field>
+    </object>
+    <object pk="16" model="auth.permission">
+        <field type="CharField" name="name">Can add site</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="codename">add_site</field>
+    </object>
+    <object pk="17" model="auth.permission">
+        <field type="CharField" name="name">Can change site</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="codename">change_site</field>
+    </object>
+    <object pk="18" model="auth.permission">
+        <field type="CharField" name="name">Can delete site</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="codename">delete_site</field>
+    </object>
+    <object pk="28" model="auth.permission">
+        <field type="CharField" name="name">Can add association</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="codename">add_association</field>
+    </object>
+    <object pk="31" model="auth.permission">
+        <field type="CharField" name="name">Can change association</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="codename">change_association</field>
+    </object>
+    <object pk="34" model="auth.permission">
+        <field type="CharField" name="name">Can delete association</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="codename">delete_association</field>
+    </object>
+    <object pk="29" model="auth.permission">
+        <field type="CharField" name="name">Can add nonce</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="codename">add_nonce</field>
+    </object>
+    <object pk="32" model="auth.permission">
+        <field type="CharField" name="name">Can change nonce</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="codename">change_nonce</field>
+    </object>
+    <object pk="35" model="auth.permission">
+        <field type="CharField" name="name">Can delete nonce</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="codename">delete_nonce</field>
+    </object>
+    <object pk="30" model="auth.permission">
+        <field type="CharField" name="name">Can add user social auth</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="codename">add_usersocialauth</field>
+    </object>
+    <object pk="33" model="auth.permission">
+        <field type="CharField" name="name">Can change user social auth</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="codename">change_usersocialauth</field>
+    </object>
+    <object pk="36" model="auth.permission">
+        <field type="CharField" name="name">Can delete user social auth</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="codename">delete_usersocialauth</field>
+    </object>
+    <object pk="1" model="auth.user">
+        <field type="CharField" name="username">user</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email">pavitm@gmail.com</field>
+        <field type="CharField" name="password">pbkdf2_sha256$10000$iHKdOavJ4fxm$Z0Ei3Chbnpe2iTjQqmJ8IWLElYmzs1GeJ6PvHSNmbrE=</field>
+        <field type="BooleanField" name="is_staff">True</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">True</field>
+        <field type="DateTimeField" name="last_login">2013-03-02T01:49:54.144000+00:00</field>
+        <field type="DateTimeField" name="date_joined">2013-03-02T01:49:54.144000+00:00</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="2" model="auth.user">
+        <field type="CharField" name="username">pavit.masson</field>
+        <field type="CharField" name="first_name">Pavit</field>
+        <field type="CharField" name="last_name">Masson</field>
+        <field type="CharField" name="email">pavitm@gmail.com</field>
+        <field type="CharField" name="password">!</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2013-03-02T01:50:32.675000+00:00</field>
+        <field type="DateTimeField" name="date_joined">2013-03-02T01:50:31.087000+00:00</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="1" model="accounts.userprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">1</field>
+        <field type="CharField" name="username"><None></None></field>
+        <field type="BooleanField" name="anonymous">False</field>
+        <field type="IPAddressField" name="ip"><None></None></field>
+        <field type="CharField" name="full_name"><None></None></field>
+        <field type="DateTimeField" name="created_at">2013-03-02T01:49:54.782000+00:00</field>
+        <field type="DateTimeField" name="last_login"><None></None></field>
+        <field type="CharField" name="fb_id"><None></None></field>
+        <field type="CharField" name="fb_access_token"><None></None></field>
+        <field type="CharField" name="first_name"><None></None></field>
+        <field type="CharField" name="last_name"><None></None></field>
+        <field type="CharField" name="name"><None></None></field>
+        <field type="CharField" name="locale"><None></None></field>
+        <field type="CharField" name="gender"><None></None></field>
+        <field type="CharField" name="hometown"><None></None></field>
+        <field type="CharField" name="location"><None></None></field>
+        <field type="CharField" name="work_position_id"><None></None></field>
+        <field type="CharField" name="work_position_name"><None></None></field>
+        <field type="CharField" name="work_start_date"><None></None></field>
+        <field type="CharField" name="work_location_id"><None></None></field>
+        <field type="CharField" name="work_location_name"><None></None></field>
+        <field type="CharField" name="work_employer_id"><None></None></field>
+        <field type="CharField" name="work_employer_name"><None></None></field>
+        <field type="CharField" name="email"><None></None></field>
+        <field type="DateTimeField" name="updated_time"><None></None></field>
+        <field type="DateTimeField" name="birthday"><None></None></field>
+        <field type="CharField" name="timezone"><None></None></field>
+        <field type="IntegerField" name="age"><None></None></field>
+        <field to="accounts.education" name="educations" rel="ManyToManyRel"></field>
+        <field to="accounts.userprofile" name="friends" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="2" model="accounts.userprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">2</field>
+        <field type="CharField" name="username">Pavit Masson</field>
+        <field type="BooleanField" name="anonymous">False</field>
+        <field type="IPAddressField" name="ip"><None></None></field>
+        <field type="CharField" name="full_name"><None></None></field>
+        <field type="DateTimeField" name="created_at">2013-03-02T01:50:31.192000+00:00</field>
+        <field type="DateTimeField" name="last_login"><None></None></field>
+        <field type="CharField" name="fb_id"><None></None></field>
+        <field type="CharField" name="fb_access_token">AAAE4EPN9xcQBAN542z6xvZBVSBDbbWqWOwDhhhNSY33Pvi5JeBbijru2BSCqyZCEmKsZBHTMv2AcutlqB4QPqxeyebT11QZD</field>
+        <field type="CharField" name="first_name">Pavit</field>
+        <field type="CharField" name="last_name">Masson</field>
+        <field type="CharField" name="name"><None></None></field>
+        <field type="CharField" name="locale"><None></None></field>
+        <field type="CharField" name="gender">male</field>
+        <field type="CharField" name="hometown"><None></None></field>
+        <field type="CharField" name="location"><None></None></field>
+        <field type="CharField" name="work_position_id"><None></None></field>
+        <field type="CharField" name="work_position_name"><None></None></field>
+        <field type="CharField" name="work_start_date"><None></None></field>
+        <field type="CharField" name="work_location_id"><None></None></field>
+        <field type="CharField" name="work_location_name"><None></None></field>
+        <field type="CharField" name="work_employer_id"><None></None></field>
+        <field type="CharField" name="work_employer_name"><None></None></field>
+        <field type="CharField" name="email">pavitm@gmail.com</field>
+        <field type="DateTimeField" name="updated_time"><None></None></field>
+        <field type="DateTimeField" name="birthday">1984-11-21T05:00:00+00:00</field>
+        <field type="CharField" name="timezone">-5</field>
+        <field type="IntegerField" name="age"><None></None></field>
+        <field to="accounts.education" name="educations" rel="ManyToManyRel"><object pk="1"></object><object pk="2"></object><object pk="3"></object><object pk="4"></object></field>
+        <field to="accounts.userprofile" name="friends" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="1" model="social_auth.usersocialauth">
+        <field to="auth.user" name="user" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="provider">facebook</field>
+        <field type="CharField" name="uid">8802091</field>
+        <field type="TextField" name="extra_data">{"access_token": "AAAE4EPN9xcQBAN542z6xvZBVSBDbbWqWOwDhhhNSY33Pvi5JeBbijru2BSCqyZCEmKsZBHTMv2AcutlqB4QPqxeyebT11QZD", "expires": "5121885", "id": "8802091"}</field>
+    </object>
+</django-objects>

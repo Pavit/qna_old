@@ -59,10 +59,13 @@ def view_question(request, slug, id):
 @csrf_exempt
 def index(request):
 	if request.user.is_authenticated():
+		print request.user.userprofile
 		user = request.user.userprofile
 		user.fb_access_token = request.user.social_auth.get(provider='facebook').extra_data["access_token"]
+		print user.fb_access_token
 		user.populate_graph_info()
 		user.save()
+		print user.gender
 		return redirect(questions)
 		#return render_to_response("questions.html", {},)
 	# 	user = request.user
@@ -150,6 +153,7 @@ def questions(request):
 
 @login_required
 def profile(request):
+
 	user = request.user.userprofile
 	#user.populate_graph_info()
 	user.save()
@@ -208,7 +212,7 @@ from core.forms import *
 from django.core.context_processors import csrf
 from django.template import RequestContext # For CSRF
 from django.forms.formsets import formset_factory, BaseFormSet
-
+@login_required
 def submitquestion(request):
 	class RequiredFormSet(BaseFormSet):
 		def __init__(self, *args, **kwargs):
