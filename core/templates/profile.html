@@ -44,7 +44,9 @@
   </nav>
   </div>
 </div>
+<div id="submitquestion"></div>
 
+<div id="search_results"></div>
 <!--PROFILE BEGINS HERE-->
 
 <div id="current_question" class="row">
@@ -80,31 +82,11 @@
             <!-- Begin Insert of User-Submitted Questions -->
             {%for question in user.userprofile.submissions.all %}
             Question:{{question.question}}<br/>
-            <div id = "visualization"></div>
-            <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-            <script type="text/javascript">
-  $(document).ready(function() {
-    google.load("visualization", "1", { packages: ["corechart"] });
-    var chartdata;
-    chartdata = [
-    ['Answer', 'Votes'],
-    {%for answer in question.answer_set.all %}
-    ['{{answer.answer}}', {{answer.get_vote_count}}],
-    {% endfor %}
-    ];
-    var datatable = google.visualization.arrayToDataTable(chartdata);
-    chart = new google.visualization.PieChart(document.getElementById('visualization'));
-    options = {
-      'backgroundColor': "transparent",
-      'colors': ['#f15c22', '#eb4f68', '#eb62ca', '#9567eb', '#73a1d5'],
-      'sliceVisibilityThreshold':0,
-      'chartArea': {'width':"100%",'height':"80%"},
-      'legend': {'position': 'bottom'}
-    };
-    chart.draw(datatable, options);
-  });
- </script>
- {%endfor%}
+            Answers: <br>
+            {% for answer in question.answer_set.all %}
+            {{answer}} : {{answer.get_vote_count}} votes <br>
+            {%endfor%}  
+            {%endfor%}
             <!-- End Insert of User-Submitted Questions -->
             </div>
           </div>    
@@ -134,10 +116,79 @@
   </div>
 </div>
 
-  <!-- Included JS Files (Compressed) -->
+<!-- DO NOT CHANGE. The order matters for the autocomplete to work with foundation -->
+  <script src="{% static 'javascripts/modernizr.foundation.js' %}"></script>
   <script src="{% static 'javascripts/jquery.js' %}"></script>
-  <script src="{% static 'javascripts/foundation.min.js'%}"></script>
-  
+  <script src="{% static 'javascripts/foundation.min.js' %}"></script>
+  <script src="{% static 'javascripts/app.js' %}"></script>
+  <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+  <script type = "text/javascript">
+
+    $(function() {
+
+      $.ui.autocomplete.prototype._renderItem = function(ul, item) {
+        return $("<li></li>").data("item.autocomplete", item).append($("<a></a>").html(item.label)).appendTo(ul);
+      };
+
+      $("#search").autocomplete({
+        source: function(request, response) {
+          var pavdude = request.term;
+          $.ajax({
+            url: "{% url search %}?searchtext=" + request.term,
+            type: "GET",
+            success: function(data) {
+              response($.map(data, function(item) {
+                return {
+                  label: item.fields.question,
+                  value: item.pk
+                }
+              }));
+            },
+            data: request.term,
+            dataType: "json"
+          });
+          var searchtext = request.term;
+        },
+
+        response: function(event, ui) {
+          ui.content.push({
+            label:  "<b>Show All Search Results</b>",
+            value: ui
+          });
+          ui.content.push({
+            label:  "<b>Submit New Question</b>",
+            value: ui
+          });
+        },
+        select: function(event, ui) {
+          event.preventDefault()
+          if (ui.item.label == "<b>Show All Search Results</b>")
+          {
+            var searchtext = $("#search").val();
+            $('#previous_question').fadeOut(300);
+            $('#current_question').fadeOut(300);
+            $('#search_results').html('&nbsp;').load('/search_results/'+searchtext+"/");
+          }
+          else if (ui.item.label == "<b>Submit New Question</b>")
+            {
+              $('#previous_question').fadeOut(300);
+              $('#current_question').fadeOut(300);
+              window.open("/submitquestion/","_self");
+            }
+          else
+          {
+            var url = "/current_question/" + ui.item.value;
+            $('#previous_question').fadeOut(300);
+            $('#current_question').delay(200).fadeOut(300);
+            $('#current_question').html('&nbsp;').load(url);
+            $('#current_question').fadeIn(300);
+            $('#previous_question').fadeIn(300);
+          };
+        }
+      })
+    });
+
+</script>
   <!-- Initialize JS Plugins -->
   <script src="{% static 'javascripts/app.js'%}"></script>
   <script type="text/javascript">

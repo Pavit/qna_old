@@ -26,7 +26,7 @@
   <div class="twelve columns">
   <nav class="top-bar">
     <ul>
-      <li class="name"><h1><a href="#">QNA</a></h1></li>
+      <li class="name"><h1><a href="{%url index%}">QNA</a></h1></li>
       <li class="toggle-topbar"><a href="#"></a></li>
     </ul>
     <section>
@@ -109,7 +109,9 @@
             url: "{% url search %}?searchtext=" + request.term,
             type: "GET",
             success: function(data) {
+
               response($.map(data, function(item) {
+                data.slice(0,6);
                 return {
                   label: item.fields.question,
                   value: item.pk
@@ -120,6 +122,7 @@
             dataType: "json"
           });
           var searchtext = request.term;
+          response(results.slice(0,6));
         },
 
         response: function(event, ui) {
@@ -133,6 +136,7 @@
           });
         },
         select: function(event, ui) {
+          event.preventDefault()
           if (ui.item.label == "<b>Show All Search Results</b>")
           {
             var searchtext = $("#search").val();
@@ -144,7 +148,7 @@
             {
               $('#previous_question').fadeOut(300);
               $('#current_question').fadeOut(300);
-              $('#submitquestion').html('&nbsp;').load('/submitquestion/');
+              window.open("/submitquestion/","_self");
             }
           else
           {

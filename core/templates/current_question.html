@@ -1,5 +1,5 @@
 <script type="text/javascript">
-$('document').ready(function() {
+$(document).ready(function() {
   pageurl = '/'+'{{current_question.slug}}'+',' + '{{current_question.id}}' + '/';
   window.history.pushState({path:pageurl},'',pageurl);
 });

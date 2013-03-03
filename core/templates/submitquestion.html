@@ -31,7 +31,7 @@
     </ul>
     <section>
       <ul class="right">
-        <li><a href="#">SUBMIT</a></li>
+        <li><a href="/submitquestion/">SUBMIT</a></li>
         <li><a href="/profile/">PROFILE</a></li>
         <li><a href="#">{% if user.is_authenticated %} LOGGED IN AS {{user.first_name}} {{user.last_name}}. {%else%} LOGIN {%endif%}</a></li>
         <li class="search">
@@ -44,6 +44,8 @@
   </nav>
   </div>
 </div>
+
+<div id="search_results"></div>
 
 <div id="current_question" class="row">
   <div class="twelve columns">
@@ -74,22 +76,22 @@
               
               <div class="nine columns h1_offset">
               {{ answer_formset.management_form }}
-              	<div class = "answer">
-              		
-              		{% for form in answer_formset.forms %}
-              		{{form.as_p}}
-              		 <span class = "right"><a class="button expand postfix delete">X</a></span>
-              		 {% endfor %}
-              		 </div>
-              		 <p><a id="add" href="#">Add another item</a></p>
-              	<!--    <div class="answer row collapse">
-                  	
+                <div class = "answer">
+                  {{answer_formset.non_form_errors }}
+                  {% for form in answer_formset.forms %}
+                  {{form.as_p}}
+
+                   {% endfor %}
+                   </div>
+
+                <!--    <div class="answer row collapse">
+                    
                     <div class="ten mobile-three columns">
-                {{ answer_formset.management_form }}    	
-                    	{% for form in answer_formset.forms %}
-                    	{{form.as_p}}
-                    	{%endfor%}
-                    	
+                {{ answer_formset.management_form }}      
+                      {% for form in answer_formset.forms %}
+                      {{form.as_p}}
+                      {%endfor%}
+                      
                     </div>
                     <div class="two mobile-one columns">
                     <a class="button expand postfix delete">X</a>
@@ -142,8 +144,85 @@
 </div>
 
   <!-- Included JS Files (Compressed) -->
+<!-- DO NOT CHANGE. The order matters for the autocomplete to work with foundation -->
+  <script src="{% static 'javascripts/modernizr.foundation.js' %}"></script>
   <script src="{% static 'javascripts/jquery.js' %}"></script>
-  <script src="{% static 'javascripts/foundation.min.js'%}"></script>
+  <script src="{% static 'javascripts/foundation.min.js' %}"></script>
+  <script src="{% static 'javascripts/app.js' %}"></script>
+  <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  pageurl = '/submitquestion/';
+  window.history.pushState({path:pageurl},'',pageurl);
+});
+</script>
+  <script type = "text/javascript">
+
+    $(function() {
+
+      $.ui.autocomplete.prototype._renderItem = function(ul, item) {
+        return $("<li></li>").data("item.autocomplete", item).append($("<a></a>").html(item.label)).appendTo(ul);
+      };
+
+      $("#search").autocomplete({
+        source: function(request, response) {
+          var pavdude = request.term;
+          $.ajax({
+            url: "{% url search %}?searchtext=" + request.term,
+            type: "GET",
+            success: function(data) {
+              response($.map(data, function(item) {
+                return {
+                  label: item.fields.question,
+                  value: item.pk
+                }
+              }));
+            },
+            data: request.term,
+            dataType: "json"
+          });
+          var searchtext = request.term;
+        },
+
+        response: function(event, ui) {
+          ui.content.push({
+            label:  "<b>Show All Search Results</b>",
+            value: ui
+          });
+          ui.content.push({
+            label:  "<b>Submit New Question</b>",
+            value: ui
+          });
+        },
+        select: function(event, ui) {
+          event.preventDefault()
+          if (ui.item.label == "<b>Show All Search Results</b>")
+          {
+            var searchtext = $("#search").val();
+            $('#previous_question').fadeOut(300);
+            $('#current_question').fadeOut(300);
+            $('#search_results').html('&nbsp;').load('/search_results/'+searchtext+"/");
+          }
+          else if (ui.item.label == "<b>Submit New Question</b>")
+            {
+              $('#previous_question').fadeOut(300);
+              $('#current_question').fadeOut(300);
+              window.open("/submitquestion/","_self");
+            }
+          else
+          {
+            var url = "/current_question/" + ui.item.value;
+            $('#previous_question').fadeOut(300);
+            $('#current_question').delay(200).fadeOut(300);
+            $('#current_question').html('&nbsp;').load(url);
+            $('#current_question').fadeIn(300);
+            $('#previous_question').fadeIn(300);
+          };
+        }
+      })
+    });
+
+</script>
   
   <!-- Initialize JS Plugins -->
   <script src="{% static 'javascripts/app.js'%}"></script>

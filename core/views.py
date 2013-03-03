@@ -19,6 +19,7 @@ from forms import *
 from django.shortcuts import get_object_or_404
 from random import randrange
 from django.views.decorators.csrf import csrf_exempt
+
 def test (request):
 	return render_to_response("test.html")
 
@@ -153,7 +154,6 @@ def questions(request):
 
 @login_required
 def profile(request):
-
 	user = request.user.userprofile
 	#user.populate_graph_info()
 	user.save()
@@ -192,7 +192,7 @@ def search(request):
 	print request.GET
 	if 'searchtext' in request.GET:
 		q = request.GET.get('searchtext')
-		json = serializers.serialize('json', Question.objects.filter(Q(question__icontains=q)).order_by('question'))
+		json = serializers.serialize('json', Question.objects.filter(Q(question__icontains=q)).order_by('question')[0:6])
 	# 	q = request.GET.get('searchtext')
 	# 	for question in Question.objects.filter(Q(question__icontains=q)).order_by('question'):
 	# 		data[question.question] = question
@@ -212,33 +212,51 @@ from core.forms import *
 from django.core.context_processors import csrf
 from django.template import RequestContext # For CSRF
 from django.forms.formsets import formset_factory, BaseFormSet
-@login_required
+
+
 def submitquestion(request):
-	class RequiredFormSet(BaseFormSet):
-		def __init__(self, *args, **kwargs):
-			super(RequiredFormSet, self).__init__(*args, **kwargs)
-			for form in self.forms:
-				form.empty_permitted = False
-				
-	AnswerFormSet = formset_factory(AnswerForm, max_num=5, formset = RequiredFormSet)
+	class BaseAnswerFormSet(BaseFormSet):
+		def clean(self):
+			blanks = []
+			print type(self)
+			for i in range(0, self.total_form_count()):
+				form = self.forms[i]
+				print form.cleaned_data
+				try:
+					answer = form.cleaned_data['answer']
+					print "answer: %s" %answer
+				except:
+					blanks.append(form)
+					print "found %s blanks" %len(blanks)
+			if len(blanks) >= 4:
+				raise forms.ValidationError("Must have at least two answer choices")
+
+	
+	AnswerFormSet = formset_factory(AnswerForm, max_num=5, extra = 5, formset = BaseAnswerFormSet)
 	user = request.user.userprofile
 	if request.method == 'POST': # If the form has been submitted...
 		print "this poll should be assigned to: %s" %user
 		question_form = QuestionForm(request.POST) # A form bound to the POST data
 		# Create a formset from the submitted data
 		answer_formset = AnswerFormSet(request.POST, request.FILES)
-		if question_form.is_valid() and answer_formset.is_valid():
+		print answer_formset.is_valid()
+		print "form errors %s" %answer_formset.errors
+		print "non_form errors %s" %answer_formset.non_form_errors()
+		if question_form.is_valid() and not any(answer_formset.non_form_errors()):
 			print "made it past valid check"
 			question = question_form.save(commit=False)
 			question.submitter = user
 			question.save()
-			print answer_formset
 			#print poll.customuser.username
 			for form in answer_formset.forms:
-				answer = form.save(commit=False)
-				answer.question = question
-				answer.save()
-				print answer
+				try:
+					form.cleaned_data["answer"]
+					answer = form.save(commit=False)
+					answer.question = question
+					answer.save()
+				except:
+					pass
+			print question.answer_set.all()
 			return redirect('profile')
 	else:
 		question_form = QuestionForm()
