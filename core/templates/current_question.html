@@ -3,6 +3,7 @@ $(document).ready(function() {
   pageurl = '/'+'{{current_question.slug}}'+',' + '{{current_question.id}}' + '/';
   window.history.pushState({path:pageurl},'',pageurl);
 });
+google.load("visualization", "1", { packages: ["corechart"] });
     $('.answer').click(function() {
       $('#previous_question').fadeOut(300);
       $('#current_question').fadeOut(300);
@@ -20,6 +21,7 @@ $(document).ready(function() {
     });
 
  </script>
+
 
 <div id="current_question" class="row">
   <div class="twelve columns">
@@ -46,3 +48,5 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
+
+<div id = "previous_question"></div>

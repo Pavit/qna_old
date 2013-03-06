@@ -84,49 +84,9 @@
                    {% endfor %}
                    </div>
 
-                <!--    <div class="answer row collapse">
-                    
-                    <div class="ten mobile-three columns">
-                {{ answer_formset.management_form }}      
-                      {% for form in answer_formset.forms %}
-                      {{form.as_p}}
-                      {%endfor%}
-                      
-                    </div>
-                    <div class="two mobile-one columns">
-                    <a class="button expand postfix delete">X</a>
-                    </div>
-                    
-                    
-                  </div>
-                <p class="followup text-right"><a id="add" href="#">Add answer.</a></p> -->
               </div>
             </div>
-            <!-- Tags -->
-            <!-- <div class="row">
-              <div class="three columns">
-                <h1 class="text-center">Tags</h1>
-              </div>
-              <div class="nine columns h1_offset">
-                <input id="id_tags" type="text" name="tags" maxlength="140" placeholder="What is your question about?" />
-                  <script type="text/javascript">init_jQueryTagit({
-                            objectId: 'id_tags',
-                            sourceUrl: '/tagging_autocomplete_tagit/list',
-                            fieldName: 'tags',
-                            minLength: 1,
-                            removeConfirmation: true,
-                            caseSensitive: true,
-                            animate: true,
-                            maxLength: 50,
-                            maxTags: 20,
-                            onTagAdded  : null,
-                            onTagRemoved: null,
-                            onTagClicked: null,
-                            onMaxTagsExceeded: null,
-                        })
-                  </script>
-              </div>
-            </div> -->
+
             <!-- Submit -->
             <div class="row">
               <div class="three columns">
@@ -143,6 +103,27 @@
   </div>
 </div>
 
+<div id = "current_question"></div>
+<div id = "previous_question"></div>
+    <script type="text/javascript">
+  google.load("visualization", "1", { packages: ["corechart"] });
+  $(document).ready(function() {
+    $('.answer').bind('click', function() {
+        $('#previous_question','#current_question').fadeOut(300);
+        $.ajax({
+          url: '/vote/' + this.id + "/",
+          success: function(data) {
+            Change(data.previousanswers);
+            $('#current_question').html('&nbsp;').load('/current_question/' + data.current_question_pk + "/");
+            $('#current_question').fadeIn(300);
+            $('#previous_question').html('&nbsp;').load('/previous_question/' + data.previous_question_pk + "/");
+            $('#previous_question').fadeIn(300);
+          }
+        });
+
+    });
+  });
+</script>
   <!-- Included JS Files (Compressed) -->
 <!-- DO NOT CHANGE. The order matters for the autocomplete to work with foundation -->
   <script src="{% static 'javascripts/modernizr.foundation.js' %}"></script>

@@ -28,13 +28,6 @@ def previous_question(request, previous_question_pk):
 	resp = {
 		'previous_question': previous_question,
 	}
-	# answer_list =[]
-	# answer_list.append(["Answer", "Votes"])
-	# for a in previous_question.answer_set.all():
-	# 	answer_list.append([a.answer, a.get_vote_count()])
-	# resp["answers"] = answer_list
-	#data = simplejson.dumps(resp)
-	#return HttpResponse(data, mimetype = "application/json")
 	return render_to_response("previous_question.html", resp, context_instance=RequestContext(request))
 
 def current_question(request, current_question_pk):
@@ -68,21 +61,6 @@ def index(request):
 		user.save()
 		print user.gender
 		return redirect(questions)
-		#return render_to_response("questions.html", {},)
-	# 	user = request.user
-	# 	try:
-	# 		current_question = Question.objects.filter(~Q(answered_by = user))[:1].get()
-	# 	except:
-	# 		return redirect('profile')
-	# 	try:
-	# 		previous_question = request.GET.get('current_question')[0]
-	# 	except:
-	# 		previous_question = None
-	# 	# return redirect('poll/polls')
-	# 	return render_to_response("questions.html", {
-	# 		'current_question':current_question,
-	# 		'previous_question': previous_question,
-	# 		}, context_instance=RequestContext(request))
 	else:
 		return render_to_response("index.html")
 
@@ -95,14 +73,9 @@ def vote(request, answer_id):
 			ip=request.META['REMOTE_ADDR'],
 			answer = a,
 			)
-
-		print dir(request.user)
-		print request.user.is_authenticated()
 		user = request.user
-		print user.userprofile
 		if request.user.is_authenticated():
 			grabuser = request.user.userprofile
-			print grabuser
 		else:
 			grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'], user_id = randrange(10))
 		vote.users.add(grabuser)

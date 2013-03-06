@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" type="text/css" />
   <link rel="stylesheet" href="{% static 'stylesheets/foundation.min.css' %}">
   <link rel="stylesheet" href="{% static 'stylesheets/app.css' %}">
+
+
 </head>
 
 <body>
@@ -115,7 +117,28 @@
     </div>
   </div>
 </div>
+<div id = "current_question"></div>
+<div id="previous_question"></div>
 
+    <script type="text/javascript">
+  google.load("visualization", "1", { packages: ["corechart"] });
+  $(document).ready(function() {
+    $('.answer').bind('click', function() {
+        $('#previous_question','#current_question').fadeOut(300);
+        $.ajax({
+          url: '/vote/' + this.id + "/",
+          success: function(data) {
+            Change(data.previousanswers);
+            $('#current_question').html('&nbsp;').load('/current_question/' + data.current_question_pk + "/");
+            $('#current_question').fadeIn(300);
+            $('#previous_question').html('&nbsp;').load('/previous_question/' + data.previous_question_pk + "/");
+            $('#previous_question').fadeIn(300);
+          }
+        });
+
+    });
+  });
+</script>
 <!-- DO NOT CHANGE. The order matters for the autocomplete to work with foundation -->
   <script src="{% static 'javascripts/modernizr.foundation.js' %}"></script>
   <script src="{% static 'javascripts/jquery.js' %}"></script>
