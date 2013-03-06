@@ -59,6 +59,7 @@ def index(request):
 		print user.fb_access_token
 		user.populate_graph_info()
 		user.save()
+		user.check_friends()
 		print user.gender
 		return redirect(questions)
 	else:
