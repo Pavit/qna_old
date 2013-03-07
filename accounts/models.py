@@ -152,8 +152,8 @@ post_save.connect(create_user_profile, sender=User)
 from django.contrib.auth.signals import user_logged_in
 
 def update_user_profile(sender, request, user, **kwargs):
-	user.populate_graph_info(request)
-	user.check_friends()
+	user.userprofile.populate_graph_info(request)
+	user.userprofile.check_friends()
 	print "signal went through"
 	user.save()
 
