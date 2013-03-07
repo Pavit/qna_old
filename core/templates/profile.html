@@ -67,6 +67,10 @@
           <p>Age: {{user.userprofile.age}}</p>
           <p>Gender: {{user.userprofile.gender}}</p>
           <p># of Friends: {{user.userprofile.friends.count}}</p>
+          <p>Friend List: </p>
+          {%for friend in user.userprofile.friends.all %}
+          <p>{{friend.first_name}}</p></br>
+          {%endfor%}
           <p>Favorite Subject: {{user.userprofile.toptag}}</p>
           </div>    
         </div>
