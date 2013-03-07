@@ -157,7 +157,7 @@ AUTH_PROFILE_MODULE= 'accounts.UserProfile'
 #---------social_auth settings--------------------
 # SOCIAL_AUTH_USER_MODEL = 'accounts.UserProfile'
 LOGIN_URL          = '/login-form/'
-LOGIN_REDIRECT_URL = '//'
+LOGIN_REDIRECT_URL = '/questions/'
 LOGIN_ERROR_URL    = '/login-error/'
 
 FACEBOOK_EXTENDED_PERMISSIONS = [
