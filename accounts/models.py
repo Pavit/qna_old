@@ -1,4 +1,3 @@
-# Define a custom User class to work with django-social-auth
 from django.db import models
 from facepy import GraphAPI
 from django.contrib.auth.models import User
@@ -8,10 +7,6 @@ from social_auth.backends.facebook import FacebookBackend
 from social_auth.backends import google
 from social_auth.signals import socialauth_registered
 from datetime import date, datetime
-
-# class UserProfileManager(models.Manager):
-# 	def create_user(self, username, email):
-# 		return self.model._default_manager.create(username=username)
 
 
 class Education(models.Model):

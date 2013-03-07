@@ -53,15 +53,6 @@ def view_question(request, slug, id):
 @csrf_exempt
 def index(request):
 	if request.user.is_authenticated():
-		print request.user.userprofile
-		user = request.user.userprofile
-		user.fb_access_token = request.user.social_auth.get(provider='facebook').extra_data["access_token"]
-		print user.fb_access_token
-		user.populate_graph_info(request)
-		user.check_friends()
-		user.save()
-		
-		print user.gender
 		return redirect(questions)
 	else:
 		return render_to_response("index.html")
@@ -113,7 +104,6 @@ def questions(request):
 		grabuser, created = UserProfile.objects.get_or_create(username = "Anonymous", anonymous = True, ip = request.META['REMOTE_ADDR'],user_id = randrange(10))
 	#current_question = Question.objects.filter(~Q(answered_by = grabuser))[:1].get() #----enable this line to prevent repeating questions
 	current_question = Question.objects.all().order_by('?')[:1].get()
-
 	context = {'current_question' : current_question,}
 	return render_to_response("questions.html", context, context_instance=RequestContext(request))
 
@@ -132,14 +122,8 @@ def profile(request):
 	user = request.user.userprofile
 	#user.populate_graph_info()
 	user.save()
-	print user.birthday
 	uservotes = user.vote_set.all()
-	print uservotes
 	pollcount = Question.objects.all().count()
-	print "questions you submit:"
-	print user.submissions.all()
-	print "questions you answered:"
-	print user.answered.all()
 	totalvotes = 0
 	for q in user.submissions.all():
 		totalvotes += q.get_vote_count()
@@ -158,30 +142,14 @@ def search_results(request, searchtext):
 	response_dict = {
 		'results':Question.objects.filter(Q(question__icontains=searchtext)).order_by('question'),
 	}
-
 	return render_to_response("search_results.html", response_dict)
 
-
 def search(request):
-	data = {}
-	print request.GET
 	if 'searchtext' in request.GET:
 		q = request.GET.get('searchtext')
 		json = serializers.serialize('json', Question.objects.filter(Q(question__icontains=q)).order_by('question')[0:6])
-	# 	q = request.GET.get('searchtext')
-	# 	for question in Question.objects.filter(Q(question__icontains=q)).order_by('question'):
-	# 		data[question.question] = question
-	# ser = serializers.serialize(data)
-	# json = simplejson.dumps(ser)
-	print json
 	return HttpResponse(json, mimetype='application/json')
-    # dd = {}
-    # if 'question' in request.GET:
-    #     dd['entered'] = request.GET.get('question')
-    # initial = {'question':"\"This is an initial value,\" said O'Leary."}
-    # form = QuestionForm(initial=initial)
-    # dd['form'] = form
-    # return render_to_response('search_form.html',dd,context_instance=RequestContext(request))
+
 
 from core.forms import *
 from django.core.context_processors import csrf
@@ -193,10 +161,8 @@ def submitquestion(request):
 	class BaseAnswerFormSet(BaseFormSet):
 		def clean(self):
 			blanks = []
-			print type(self)
 			for i in range(0, self.total_form_count()):
 				form = self.forms[i]
-				print form.cleaned_data
 				try:
 					answer = form.cleaned_data['answer']
 					print "answer: %s" %answer
@@ -210,19 +176,13 @@ def submitquestion(request):
 	AnswerFormSet = formset_factory(AnswerForm, max_num=5, extra = 5, formset = BaseAnswerFormSet)
 	user = request.user.userprofile
 	if request.method == 'POST': # If the form has been submitted...
-		print "this poll should be assigned to: %s" %user
 		question_form = QuestionForm(request.POST) # A form bound to the POST data
 		# Create a formset from the submitted data
 		answer_formset = AnswerFormSet(request.POST, request.FILES)
-		print answer_formset.is_valid()
-		print "form errors %s" %answer_formset.errors
-		print "non_form errors %s" %answer_formset.non_form_errors()
 		if question_form.is_valid() and not any(answer_formset.non_form_errors()):
-			print "made it past valid check"
 			question = question_form.save(commit=False)
 			question.submitter = user
 			question.save()
-			#print poll.customuser.username
 			for form in answer_formset.forms:
 				try:
 					form.cleaned_data["answer"]
@@ -231,7 +191,6 @@ def submitquestion(request):
 					answer.save()
 				except:
 					pass
-			print question.answer_set.all()
 			return redirect('profile')
 	else:
 		question_form = QuestionForm()
