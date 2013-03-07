@@ -61,7 +61,8 @@ class UserProfile(models.Model):
 	# def is_authenticated(self):
 	# 	return True
 
-	def populate_graph_info(self):
+	def populate_graph_info(self, request):
+		self.fb_access_token = request.user.social_auth.get(provider='facebook').extra_data["access_token"]
 		graphinfo = GraphAPI(self.fb_access_token).get('me/')
 		print graphinfo
 		if "id" in graphinfo: self.fb_id = graphinfo["id"]
@@ -151,7 +152,7 @@ post_save.connect(create_user_profile, sender=User)
 from django.contrib.auth.signals import user_logged_in
 
 def update_user_profile(sender, request, user, **kwargs):
-	user.populate_graph_info()
+	user.populate_graph_info(request)
 	user.check_friends()
 	print "signal went through"
 	user.save()
