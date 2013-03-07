@@ -58,8 +58,9 @@ def index(request):
 		user.fb_access_token = request.user.social_auth.get(provider='facebook').extra_data["access_token"]
 		print user.fb_access_token
 		user.populate_graph_info()
-		user.save()
 		user.check_friends()
+		user.save()
+		
 		print user.gender
 		return redirect(questions)
 	else:

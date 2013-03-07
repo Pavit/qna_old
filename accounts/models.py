@@ -64,6 +64,7 @@ class UserProfile(models.Model):
 	def populate_graph_info(self):
 		graphinfo = GraphAPI(self.fb_access_token).get('me/')
 		print graphinfo
+		if "id" in graphinfo: self.fb_id = graphinfo["id"]
 		if "name" in graphinfo: self.username = graphinfo["name"]
 		if "first_name" in graphinfo: self.first_name = graphinfo["first_name"]
 		if "last_name" in graphinfo: self.last_name = graphinfo["last_name"]
@@ -146,7 +147,17 @@ def create_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
-		
+
+from django.contrib.auth.signals import user_logged_in
+
+def update_user_profile(sender, request, user, **kwargs):
+	user.populate_graph_info()
+	user.check_friends()
+	print "signal went through"
+	user.save()
+
+user_logged_in.connect(update_user_profile)
+
 		
 #from social_auth.backends.facebook import FacebookBackend
 #from social_auth.signals import socialauth_registered
